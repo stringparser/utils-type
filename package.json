@@ -1,0 +1,28 @@
+{
+  "name": "utils-type",
+  "version": "0.1.0",
+  "description": "constructor-based type checking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stringparser/utils-type"
+  },
+  "keywords": [
+    "utils",
+    "type",
+    "constructor"
+  ],
+  "author": "Javier Carrillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stringparser/utils-type/issues"
+  },
+  "homepage": "https://github.com/stringparser/utils-type", 
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "should": "^4.0.4"
+  }
+}

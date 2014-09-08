@@ -2,22 +2,18 @@
 function is(what){
 
   var leType = { }, ctorName, super_;
-
   if( what === null || what === void 0 ) {
-
     leType[''+what] = true;
     return leType;
-
   } else
     ctorName = what.constructor.name.toLowerCase();
 
   if( what === Object(what) ){
 
-    leType.object = true;
-
     if( ctorName === 'object' )
       ctorName = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
 
+    leType.object = true;
     leType[ctorName] = true;
 
     super_ = what.constructor.super_;

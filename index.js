@@ -13,19 +13,16 @@ function is(what){
 
     if( ctorName === 'object' ){
       ctorName = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
-      console.log(ctorName);
     }
 
     leType.object = true;
     leType[ctorName] = true;
     super_ = what.constructor.super_;
 
-    if( super_ ){
-      while(super_){
-        leType[super_.name.toLowerCase()] = true;
-        super_ = super_.constructor.super_;
-      }
-    }
+    while(super_){
+      leType[super_.name.toLowerCase()] = true;
+      super_ = super_.constructor.super_;
+    }    
   }
 
   if(what) leType[ctorName] = what;

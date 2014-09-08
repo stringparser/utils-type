@@ -57,35 +57,47 @@ is( function(){ } );
 // -> { object: true, function: [Function] }
 ```
 
-## Composing
+## composing
+
+The function returns an object, so you can compose. No more booleans!
 
 ```js
 
-var arr = [1,/heythere/,3];
+var arr = [false,0,/heythere/];
 
-is(is(arr).array[0]).number
-// -> 1           (truthy)
-is(is(arr).array[1]).regexp
-// -> /heythere/  (truthy)
-is(is(arr).array[2]).object
-// -> undefined   (number is not an object, just because the prop is not defined on the returned object)
-var check = is(arr);
-
-var grab = check.array[4] || check.array[3] || type[2] > 1
+is(is(arr).array[0]).boolean
+// -> 'false'       (truthy)
+is(is(arr).array[1]).number
+// -> '0'           (truthy)
+is(is(arr).array[1]).object
+// -> undefined     (nope)
+is(is(arr).array[2]).regexp
+// /heythere/     (truthy)
 ```
 
-## *a posteriory what*? => Why
+## ternary what?
 
-`is[ConstructorName](var)` -> priori. You know what you have to check and you do so.
-`is(var)` -> posteriory. You dismiss edge cases (`null` and `undefined`) and write what you can find out of the type.
+Or is enough
 
-Give `var` and get `WTF` is that thing.
+```js
+var check = is([false,0,/heythere/]);
+var grab = check.array[0].object /* -> undefined  */ ||
+           check.array[1].regexp /* -> undefined  */ ||
+           check.array[2].regexp /* -> /heythere/ */;
+```
 
 # todo
 
+ - [ ] Maybe chain everything ?
+   * that is `is([1,2,3]).array[1].number > 0`
+   * instead of what's the case now `is(is([1,2,3]).array[1]).number > 0`
  - [ ] Make browser tests
  - [ ] Make more server tests
  - [ ] Provide a map to rename `type`/`instances` names as properties since it seems to be an issue for some environments.
+
+# test
+
+    `make test` or `npm test`
 
 # license
 

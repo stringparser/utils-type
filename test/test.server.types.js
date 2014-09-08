@@ -15,11 +15,13 @@ describe('utils-type', function(){
   });
 
   it('`NaN` should be a `number` and "NaN"', function(){
-    assert( is(NaN).number && is(NaN).nan );
+    var type = is(NaN);
+    assert( type.number && type.nan );
   });
 
   it('`Infinity` should be a `number` and "Infinity"', function(){
-    assert( is(Infinity).number && is(Infinity).infinity );
+    var type = is(Infinity);
+    assert( type.number && type.infinity );
   });
 
 });

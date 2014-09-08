@@ -8,10 +8,12 @@ function is(what){
   }
 
   ctorName = what.constructor.name.toLowerCase();
+
   if( what === Object(what) ){
 
     if( ctorName === 'object' ){
       ctorName = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
+      console.log(ctorName);
     }
 
     leType.object = true;

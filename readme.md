@@ -2,10 +2,9 @@
 
 A posteriory, constructor-based, simple type checking for `JS`.
 
-Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormtaylor/is) and a simple question
+Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormtaylor/is).
 
-> Why not check the constructor's name?
-> I know, I know... think about it a little bit more...
+Implementation state : missing browser tests.
 
 ## install
 
@@ -52,11 +51,35 @@ is( function(){ } );
 // -> { object: true, function: [Function] }
 ```
 
+## Composing
+
+```js
+
+var arr = [1,/heythere/,3];
+
+is(is(arr).array[0]).number
+// -> 1           (truthy)
+is(is(arr).array[1]).regexp
+// -> /heythere/  (truthy)
+is(is(arr).array[2]).object
+// -> undefined   (number is not an object, just because the prop is not defined on the returned object)
+var check = is(arr);
+
+var grab = check.array[4] || check.array[3] || type[2] > 1
+```
+
+## *a posteriory what*? => Why
+
+`is[ConstructorName](var)` -> priori. You know what you have to check and you do so.
+`is(var)` -> posteriory. You dismiss edge cases (`null` and `undefined`) and write what you can find out of the type.
+
+Give `var` and get `WTF` is that thing.
+
 # todo
 
  - [ ] Make browser tests
  - [ ] Make more server tests
- - [ ] maybe provide a map to rename type names since it seems to be an issue on some environments
+ - [ ] Provide a map to rename `type`/`instances` names as properties since it seems to be an issue for some environments.
 
 # license
 

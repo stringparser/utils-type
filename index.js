@@ -1,9 +1,7 @@
 
-var toString = ({}).toString;
-
 function is(what){
 
-  var leType = { }, ctorName, super_, stringRep;
+  var leType = { }, ctorName, super_;
 
   if( what === null || what === void 0 ) {
 
@@ -16,17 +14,14 @@ function is(what){
   if( what === Object(what) ){
 
     leType.object = true;
-    stringRep = what.toString();
 
-    if( stringRep[0] !== '[' )
-      stringRep = toString.call(what);
+    if( ctorName === 'object' )
+      ctorName = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
 
-    stringRep = stringRep.match(/\w+/g)[1].toLowerCase();
-    leType[stringRep] = true;
+    leType[ctorName] = true;
 
-    if( what.constructor.super_ ){
-
-      super_ = what.constructor.super_;
+    super_ = what.constructor.super_;
+    if( super_ ){
       while(super_){
         leType[super_.name.toLowerCase()] = true;
         super_ = super_.constructor.super_;

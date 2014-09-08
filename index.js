@@ -1,64 +1,64 @@
-var types = [
-  arguments,
-  function(){},
-  [],
-  true,             // remains unchanged
-  new Boolean(),
-  new Date(),
-  new Error(),
-  Math,
-  1,                // remains unchanged
-  {},
-  /(?:)/,
-  'test',
-  null,
-  undefined,
-  NaN,
-  Infinity
-];
+/**
+ * function is
+ *
+ * @param `type` what
+ * @return `object` type
+ */
 
 function is(what){
 
-  var type = { };
-  console.log('\n'+({}).toString.call(what))
-  if( what === null || what === void 0 || what === Infinity){
-    type[what] = true;
-    return type;
-  }
+  var leType = { }, ctorName, stringRep, super_;
 
-  if( what === true || what === false ){
-    type.boolean = true;
-    return type;
-  }
-
-  var stringRep = what.toString();
-  var ctorName = what.constructor ? what.constructor.name : null;
-
-  if( what !== what && ctorName === 'Number' ){
-    type[what] = true;
+  if( what === null || what === void 0 ) {
+    stringRep = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
+    leType[stringRep] = true;
+    return leType;
   } else {
+    ctorName = what.constructor.name.toLowerCase();
+  }
 
-    if(stringRep[0] !== '[')
+  if( what === Object(what) ){
+    leType.object = true;
+    stringRep = what.toString();
+
+    if( stringRep[0] !== '[')
       stringRep = ({}).toString.call(what);
 
-    stringRep = stringRep.match(/\w+/g);
+    stringRep = stringRep.match(/\w+/g)[1].toLowerCase();
+    leType[stringRep] = true;
 
-    console.log('stringRep', stringRep, 'ctorName', ctorName)
-    if( ctorName === stringRep[1] )
-      stringRep = stringRep[0];
-    else{
-      ctorName = stringRep[0];
-      stringRep = stringRep[1];
+
+    if(what.constructor.super_){
+
+      super_ = what.constructor.super_;
+      while(super_){
+        leType[super_.name.toLowerCase()] = true;
+        super_ = super_.constructor.super_;
+      }
+
+      console.log(leType);
     }
-
-    type[stringRep] = true;
-    type[ctorName] = what;
   }
 
-  return type;
+  if(what) leType[ctorName] = what;
+  else     leType[ctorName] = ''+what;
+
+  if(leType.object)
+    return leType;
+
+  if(!leType.number){}
+  else if( what !== what )
+    leType.nan = true;
+  else if( what === Infinity )
+    leType.infinity = true;
+
+  if(!leType.boolean){}
+  else if( what === true)
+    leType.true = true;
+  else if( what === false )
+    leType.false = true;
+
+  return leType;
 }
 
-types.forEach(function(typeName){
-
-  console.log(is(typeName))
-});
+exports = module.exports = is;

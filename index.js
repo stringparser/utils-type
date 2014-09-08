@@ -1,5 +1,5 @@
 /**
- * function is
+ * function `is`
  *
  * @param `type` what
  * @return `object` type
@@ -18,6 +18,7 @@ function is(what){
   }
 
   if( what === Object(what) ){
+
     leType.object = true;
     stringRep = what.toString();
 
@@ -27,7 +28,6 @@ function is(what){
     stringRep = stringRep.match(/\w+/g)[1].toLowerCase();
     leType[stringRep] = true;
 
-
     if(what.constructor.super_){
 
       super_ = what.constructor.super_;
@@ -35,8 +35,6 @@ function is(what){
         leType[super_.name.toLowerCase()] = true;
         super_ = super_.constructor.super_;
       }
-
-      console.log(leType);
     }
   }
 

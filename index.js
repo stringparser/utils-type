@@ -5,18 +5,19 @@ function is(what){
   if( what === null || what === void 0 ) {
     leType[''+what] = true;
     return leType;
-  } else
-    ctorName = what.constructor.name.toLowerCase();
+  }
 
+  ctorName = what.constructor.name.toLowerCase();
   if( what === Object(what) ){
 
-    if( ctorName === 'object' )
+    if( ctorName === 'object' ){
       ctorName = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
+    }
 
     leType.object = true;
     leType[ctorName] = true;
-
     super_ = what.constructor.super_;
+
     if( super_ ){
       while(super_){
         leType[super_.name.toLowerCase()] = true;

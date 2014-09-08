@@ -22,11 +22,14 @@ function is(what){
     while(super_){
       leType[super_.name.toLowerCase()] = true;
       super_ = super_.constructor.super_;
-    }    
+    }
   }
 
-  if(what) leType[ctorName] = what;
-  else     leType[ctorName] = ''+what;
+  // falsy values -> to string
+  if(what)
+    leType[ctorName] = what;
+  else
+    leType[ctorName] = ''+what;
 
   if(leType.object)
     return leType;

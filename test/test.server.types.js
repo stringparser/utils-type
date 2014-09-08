@@ -7,15 +7,19 @@ describe('utils-type', function(){
 
   types.forEach(function(typeUnit){
 
-    typeNames = Object.keys(typeUnit);
-    typeNames.forEach(function(typeName){
+    var type = Object.keys(typeUnit)[0];
 
-      console.log(is(typeUnit[typeName]), typeName);
-      it('`'+JSON.stringify(typeUnit[typeName])+'` types "'+typeName+'"', function(){
-        assert( is(typeUnit[typeName])[typeName] );
-      });
-    })
+    it('`'+typeUnit[type]+'` should be "'+type+'"', function(){
+      assert( is(typeUnit[type])[type] );
+    });
+  });
 
+  it('`NaN` should be a `number` and "NaN"', function(){
+    assert( is(NaN).number && is(NaN).nan );
+  });
+
+  it('`Infinity` should be a `number` and "Infinity"', function(){
+    assert( is(Infinity).number && is(Infinity).infinity );
   });
 
 });

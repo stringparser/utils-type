@@ -77,13 +77,13 @@ is(is(arr).array[2]).regexp
 
 ## ternary what?
 
-Or is enough
+`or` is enough
 
 ```js
 var check = is([false,0,/heythere/]);
-var grab = check.array[0].object /* -> undefined  */ ||
-           check.array[1].regexp /* -> undefined  */ ||
-           check.array[2].regexp /* -> /heythere/ */;
+var grab = is(check.array[0]).object  || /* -> undefined  */
+           is(check.array[1]).regexp  || /* -> undefined  */
+           is(check.array[2]).regexp     /* -> /heythere/ */;
 ```
 
 # todo
@@ -97,7 +97,9 @@ var grab = check.array[0].object /* -> undefined  */ ||
 
 # test
 
-    `make test` or `npm test`
+    $ make test
+    or
+    $ npm test
 
 # license
 

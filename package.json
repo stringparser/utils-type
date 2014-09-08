@@ -1,6 +1,6 @@
 {
   "name": "utils-type",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "constructor-based type checking",
   "main": "index.js",
   "scripts": {

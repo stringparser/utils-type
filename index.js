@@ -7,8 +7,7 @@ function is(what){
 
   if( what === null || what === void 0 ) {
 
-    stringRep = toString.call(what).match(/\w+/g)[1].toLowerCase();
-    leType[stringRep] = true;
+    leType[''+what] = true;
     return leType;
 
   } else

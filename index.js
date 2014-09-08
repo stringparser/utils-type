@@ -1,34 +1,31 @@
-/**
- * function `is`
- *
- * @param `type` what
- * @return `object` type
- */
+
+var toString = ({}).toString;
 
 function is(what){
 
-  var leType = { }, ctorName, stringRep, super_;
+  var leType = { }, ctorName, super_, stringRep;
 
   if( what === null || what === void 0 ) {
-    stringRep = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
+
+    stringRep = toString.call(what).match(/\w+/g)[1].toLowerCase();
     leType[stringRep] = true;
     return leType;
-  } else {
+
+  } else
     ctorName = what.constructor.name.toLowerCase();
-  }
 
   if( what === Object(what) ){
 
     leType.object = true;
     stringRep = what.toString();
 
-    if( stringRep[0] !== '[')
-      stringRep = ({}).toString.call(what);
+    if( stringRep[0] !== '[' )
+      stringRep = toString.call(what);
 
     stringRep = stringRep.match(/\w+/g)[1].toLowerCase();
     leType[stringRep] = true;
 
-    if(what.constructor.super_){
+    if( what.constructor.super_ ){
 
       super_ = what.constructor.super_;
       while(super_){

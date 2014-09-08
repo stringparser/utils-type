@@ -13,8 +13,9 @@ Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormt
 
 # usage
 
-``js
+```js
 var is = require('utils-type');
+
 is( 0 );
 // -> { number: '0' }
 is( 42 );
@@ -49,7 +50,7 @@ is( new EventEmitter() );
 // -> { object: true, eventemitter: { domain: null, _events: {}, _maxListeners: 10 } }
 is( function(){ } );
 // -> { object: true, function: [Function] }
-``
+```
 
 # todo
 

@@ -4,7 +4,7 @@
   "description": "constructor-based type checking",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,8 @@
   "bugs": {
     "url": "https://github.com/stringparser/utils-type/issues"
   },
-  "homepage": "https://github.com/stringparser/utils-type", 
+  "homepage": "https://github.com/stringparser/utils-type",
   "devDependencies": {
-    "mocha": "^1.21.4",
-    "should": "^4.0.4"
+    "mocha": "^1.21.4"
   }
 }

@@ -1,10 +1,11 @@
 # utils-type[<img alt="NPM version" src="http://img.shields.io/npm/v/utils-type.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/utils-type)
 
-A posteriory, constructor-based, simple type checking for `javascript`.
+A posteriory, constructor-based, simple type checking for `JS`.
 
 Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormtaylor/is) and a simple question
 
 > Why not check the constructor's name?
+> I know, I know... think about it a little bit more...
 
 ## install
 

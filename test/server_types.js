@@ -50,7 +50,7 @@ module.exports = (function(){
     },
     {
       what : Math,
-      type : ['object']
+      type : ['object', 'math']
     },
     {
       what : new Stream(),

@@ -1,5 +1,4 @@
 
-var ansiJS = function(str){ return str; };
 var timer, exitCode;
 
 function format(type, str, fn){
@@ -35,7 +34,9 @@ function describe(/* arguments */){
 
   var args = [].slice.call(arguments);
   var fn = args.pop();
-  var str = args.join('');
+  var str = args.map(function(arg){
+    return ''+arg;
+  }).join(' ');
 
   process.stdout.write(format(this.name, str, fn));
 }
@@ -45,7 +46,9 @@ function it(/* arguments */){
 
   var args = [].slice.call(arguments);
   var fn = args.pop();
-  var str = args.join('');
+  var str = args.map(function(arg){
+    return ''+arg;
+  }).join(' ');
 
   process.stdout.write(format(this.name, str, fn));
 }

@@ -1,4 +1,25 @@
 
+/*
+ *
+ */
+
+function label(){
+
+  if(process.env.NODE_ENV !== 'test')
+    return require('utils-config')({
+        object : 'obj',
+         array : 'arr',
+      function : 'fn'
+    });
+  else
+    return void 0;
+}
+exports.label = label;
+
+/*
+ *
+ */
+
 function is(what){
 
   var leType = { }, ctorName, super_;
@@ -7,25 +28,25 @@ function is(what){
     return leType;
   }
 
-  ctorName = what.constructor.name.toLowerCase();
+  ctorName = (what.constructor.name || '');
+
+  if( ctorName === '' || ctorName === 'Object' )
+    ctorName = ({}).toString.call(what).match(/\w+/g)[1];
 
   if( what === Object(what) ){
 
-    if( ctorName === 'object' ){
-      ctorName = ({}).toString.call(what).match(/\w+/g)[1].toLowerCase();
-    }
-
     leType.object = true;
-    leType[ctorName] = true;
     super_ = what.constructor.super_;
 
-    while(super_){
+    while(super_){ // utils.inherit pattern
       leType[super_.name.toLowerCase()] = true;
       super_ = super_.constructor.super_;
     }
   }
 
-  // falsy values -> to string
+  ctorName = ctorName.toLowerCase();
+  ctorName = label(ctorName) || ctorName;
+
   if(what)
     leType[ctorName] = what;
   else
@@ -42,5 +63,4 @@ function is(what){
 
   return leType;
 }
-
 exports = module.exports = is;

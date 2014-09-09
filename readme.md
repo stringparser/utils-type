@@ -82,7 +82,7 @@ is(is(arr).array[2]).regexp
 
 ```js
 var check = is([false,0,/heythere/]);
-var grab = is(check.array[0]).object  || /* -> undefined  */
+var grab = is(check.array[0]).regexp  || /* -> undefined  */
            is(check.array[1]).regexp  || /* -> undefined  */
            is(check.array[2]).regexp     /* -> /heythere/ */;
 ```

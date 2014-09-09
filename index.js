@@ -1,22 +1,13 @@
 
-/*
- * No labels by default or in test environment
+/**
+ * Exports
  */
-
-var labels = { };
-function typeLabel(key, value){
-
-  if(process.env.NODE_ENV !== 'test')
-    return value ? labels[key] = value : labels[key];
-  else
-    return void 0;
-}
+exports = module.exports = is;
 exports.typeLabel = typeLabel;
 
-/*
+/**
  * The actual function
  */
-
 function is(what){
 
   var leType = { }, ctorName, super_, label;
@@ -61,4 +52,17 @@ function is(what){
 
   return leType;
 }
-exports = module.exports = is;
+
+/*
+ * No labels by default
+ * No labels in test environment
+ */
+
+var labels = { };
+function typeLabel(key, value){
+
+  if(process.env.NODE_ENV !== 'test')
+    return value ? labels[key] = value : labels[key];
+  else
+    return void 0;
+}

@@ -1,5 +1,7 @@
 
-var ansiJS = require('ansi-highlight');
+var ansiJS = function(str){
+  return str;
+};
 var timer, exitCode;
 
 function format(type, str, fn){

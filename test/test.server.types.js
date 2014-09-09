@@ -12,17 +12,17 @@ describe('utils-type', function(){
 
     var type = Object.keys(typeUnit)[0];
 
-    it(typeUnit[type]+' should be "'+type+'"', function(){
+    it(typeUnit[type], ' should be "'+type+'"', function(){
       assert( is(typeUnit[type])[type] );
     });
   });
 
-  it('NaN should be a `number` and have nan property"', function(){
+  it(NaN, 'should be a `number` and have nan property"', function(){
     var type = is(NaN);
     assert( type.number && type.nan );
   });
 
-  it('Infinity should be a `number` and have infinity property', function(){
+  it(Infinity, 'should be a `number` and have infinity property', function(){
     var type = is(Infinity);
     assert( type.number && type.infinity );
   });

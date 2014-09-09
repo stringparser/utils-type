@@ -1,5 +1,5 @@
 
-var ansiJS = process.versions.node.split('.')[1] > 9 ? require('ansi-highlight') : function(str){ return str; };
+var ansiJS = function(str){ return str; };
 var timer, exitCode;
 
 function format(type, str, fn){
@@ -35,9 +35,7 @@ function describe(/* arguments */){
 
   var args = [].slice.call(arguments);
   var fn = args.pop();
-  var str = args.map(function(strBody){
-    return ansiJS(strBody);
-  }).join('');
+  var str = args.join('');
 
   process.stdout.write(format(this.name, str, fn));
 }
@@ -47,10 +45,7 @@ function it(/* arguments */){
 
   var args = [].slice.call(arguments);
   var fn = args.pop();
-  var str = args.map(function(arg){
-    arg = ' '+arg;
-    return ansiJS(arg);
-  }).join('');
+  var str = args.join('');
 
   process.stdout.write(format(this.name, str, fn));
 }

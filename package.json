@@ -24,9 +24,6 @@
     "url": "https://github.com/stringparser/utils-type/issues"
   },
   "homepage": "https://github.com/stringparser/utils-type",
-  "devDependencies": {
-    "ansi-highlight": "^1.0.2"
-  },
   "dependencies": {
     "utils-config": "^0.1.8"
   }

@@ -13,11 +13,11 @@ function format(type, str, fn){
   if(str === void 0 || str === null || str.trim() === '')
     badge = ' (pending)';
   else if(test === 'passed')
-    badge = ' \033[36m✓\033[0m ';
+    badge = '  \033[36m✔\033[0m  ';
   else if(test === 'err')
-    badge = ' \033[31m✖\033[0m ';
+    badge = '  \033[31m✗ ➜\033[0m ';
 
-  str = type === 'describe' ? '    '+str+badge : '    '+badge+str;
+  str = type === 'describe' ? '   ▼\n   ▼ '+str+'' : ' '+badge+str;
   exitCode = exitCode === 1 ? 1 : (test === 'err' ? 1 : 0);
 
   if(timer)

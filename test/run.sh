@@ -7,8 +7,8 @@ export NODE_ENV=test
 
 echo
 for file in $@; do
-  printf "\033[90m   ${file#test/}\033[0m \n"
-  node $file 2> /tmp/stderr && echo "   -- \n   \033[90mall passed\033[0m \033[36m✓\033[0m"
+  printf "   ➜ \033[90m${file#test/}\033[0m\n ---\n"
+  node $file 2> /tmp/stderr && echo " --- \n   \033[36m✓\033[0m all passed"
   code=$?
   if test $code -ne 0; then
     echo "\033[31m   ✖ fail!\033[0m"

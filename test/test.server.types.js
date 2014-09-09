@@ -6,7 +6,7 @@ var bdd = require('./bdd');
 var describe = bdd.describe;
 var it = bdd.it;
 
-describe('utils-type: server', function(){
+describe('utils-type server', function(){
 
   types.forEach(function(typeUnit){
 

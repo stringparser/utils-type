@@ -17,7 +17,7 @@ function format(type, str, fn){
   else if(test === 'err')
     badge = ' \033[31m✖\033[0m ';
 
-  str = type === 'describe' ? str+badge : '    '+badge+str;
+  str = type === 'describe' ? '    '+str+badge : '    '+badge+str;
   exitCode = exitCode === 1 ? 1 : (test === 'err' ? 1 : 0);
 
   if(timer)
@@ -38,7 +38,7 @@ function describe(/* arguments */){
     return ''+arg;
   }).join(' ');
 
-  process.stdout.write(format(this.name, str, fn));
+  process.stdout.write(format('describe', str, fn));
 }
 exports.describe = describe;
 
@@ -50,6 +50,6 @@ function it(/* arguments */){
     return ''+arg;
   }).join(' ');
 
-  process.stdout.write(format(this.name, str, fn));
+  process.stdout.write(format('it', str, fn));
 }
 exports.it = it;

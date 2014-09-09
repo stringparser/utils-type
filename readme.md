@@ -105,14 +105,14 @@ is(is(arr).array[2]).number
 
 ### todo
 
- - [ ] Maybe chain everything ?
-   * that is `is([1,2,3]).array[1].number > 0`
-   * instead of what's the case now `is(is([1,2,3]).array[1]).number > 0`
  - [ ] Make browser tests
  - [X] Make more server tests (included `stream`, `event emitter`)
  - [X] Provide a map so to rename `types`. Either because:
    * You like things your way, sorter, different prop names.
    * It seems to be an issue for some environments to have a `function` property.
+ - [ ] Maybe chain everything ?
+   * that is `is([1,2,3]).array[1].number > 0`
+   * instead of what's the case now `is(is([1,2,3]).array[1]).number > 0`   
 
 ### license
 

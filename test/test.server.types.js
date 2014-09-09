@@ -10,19 +10,37 @@ describe('utils-type', function(){
 
   types.forEach(function(typeUnit){
 
-    var type = Object.keys(typeUnit)[0];
+    var typeList = typeUnit.what;
+    var typeName = typeUnit.type;
 
-    it(typeUnit[type], ' should be "'+type+'"', function(){
-      assert( is(typeUnit[type])[type] );
+    typeName.forEach(function(type){
+
+      if(!Array.isArray(typeList)){
+
+        it(typeList, ' should be {'+type+'}', function(){
+          assert( is(typeList)[type] );
+        });
+
+      } else {
+
+        typeList.forEach(function(typeWhat){
+
+          it(typeWhat, ' should be {'+type+'}', function(){
+            assert( is(typeWhat)[type] );
+          });
+
+        });
+      }
+
     });
   });
 
-  it(NaN, 'should be a `number` and have nan property"', function(){
+  it('[NaN] should be a {number} and have "nan" property', function(){
     var type = is(NaN);
     assert( type.number && type.nan );
   });
 
-  it(Infinity, 'should be a `number` and have infinity property', function(){
+  it('[Infinity] should be a {number} and have "infinity" property', function(){
     var type = is(Infinity);
     assert( type.number && type.infinity );
   });

@@ -4,24 +4,61 @@ var EventEmitter = require('events').EventEmitter;
 
 module.exports = (function(){
   return ([
-    {         null : null                 },
-    {    undefined : undefined            },
-    {      boolean : true                 },
-    {      boolean : false                },
-    {       number : 0                    },
-    {       number : 1                    },
-    {       number : 1.5                  },
-    {       object : { yep : 'yep' }      },
-    {    arguments : arguments            },
-    {     function : function(){}         },
-    {        error : new Error()          },
-    {       regexp : new RegExp()         },
-    {       string : 'a string'           },
-    {       number : Math.E               },
-    {        array : [1,2]                },
-    {         date : new Date()           },
-    {         math : Math                 },
-    {       stream : new Stream()         },
-    { eventemitter : new EventEmitter()   }
+    {
+      what : null,
+      type : ['null']
+    },
+    {
+      what : undefined,
+      type : ['undefined']
+    },
+    {
+      what : [true, false],
+      type : ['boolean']
+    },
+    {
+      what : [ 0, 1, 1.5, Math.E ],
+      type : ['number']
+    },
+    {
+      what : { yep : 'yep' },
+      type : ['object']
+    },
+    {
+      what : arguments,
+      type : ['arguments', 'object']
+    },
+    {
+      what : [function(){}],
+      type : ['function', 'object']
+    },
+    {
+      what : [new Error()],
+      type : ['error', 'object']
+    },
+    {
+      what : [new RegExp()],
+      type : ['regexp', 'object']
+    },
+    {
+      what : 'a string',
+      type : ['string']
+    },
+    {
+      what : new Date(),
+      type : ['date', 'object']
+    },
+    {
+      what : Math,
+      type : ['object']
+    },
+    {
+      what : new Stream(),
+      type : ['object', 'stream', 'eventemitter']
+    },
+    {
+      what : new EventEmitter(),
+      type : ['object', 'eventemitter']
+    }
   ]);
 })();

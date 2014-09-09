@@ -1,28 +1,24 @@
 
 /*
- *
+ * No labels by default or in test environment
  */
 
-function label(){
+function typeLabel(){
 
   if(process.env.NODE_ENV !== 'test')
-    return require('utils-config')({
-        object : 'obj',
-         array : 'arr',
-      function : 'fn'
-    });
+    return require('utils-config')({ });
   else
     return void 0;
 }
-exports.label = label;
+exports.typeLabel = typeLabel;
 
 /*
- *
+ * The actual function
  */
 
 function is(what){
 
-  var leType = { }, ctorName, super_;
+  var leType = { }, ctorName, super_, label;
   if( what === null || what === void 0 ) {
     leType[''+what] = true;
     return leType;
@@ -39,13 +35,14 @@ function is(what){
     super_ = what.constructor.super_;
 
     while(super_){ // utils.inherit pattern
-      leType[super_.name.toLowerCase()] = true;
+      label = typeLabel(super_.name) || super_.name.toLowerCase();
+      leType[ label ] = true;
       super_ = super_.constructor.super_;
     }
   }
 
   ctorName = ctorName.toLowerCase();
-  ctorName = label(ctorName) || ctorName;
+  ctorName = typeLabel(ctorName) || ctorName;
 
   if(what)
     leType[ctorName] = what;

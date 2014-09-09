@@ -82,7 +82,7 @@ is(
     is([1,Infinity,3]).array[1] ).number ).Infinity
 ```
 
-Something I don't know if I should change is how falsy values are handled (`false`, `0` or `NaN`). At the moment they are concatenated with a `string` so they become truthy
+Something I don't know if I should change is how falsy values are handled (`false`, `0` or `NaN`). At the moment they are concatenated with a `string` so they become truthy. Though this might have some drawbacks I will have to investigate.
 
 ```js
 var arr = [false,0,NaN];
@@ -102,8 +102,6 @@ is(is(arr).array[2]).number
     $ make test
     or
     $ npm test
-
-though it might have some drawbacks I have to investigate.
 
 ### todo
 

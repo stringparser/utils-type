@@ -1,5 +1,5 @@
 
-var ansiJS = require('ansi-highlight');
+var ansiJS = process.versions.node.split('.')[1] > 9 ? require('ansi-highlight') : function(str){ return str; };
 var timer, exitCode;
 
 function format(type, str, fn){

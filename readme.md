@@ -5,13 +5,11 @@
 [<img alt="build" src="http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square" align="right"/>](https://travis-ci.org/stringparser/utils-type/builds)
 
 # utils-type
-> [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
-
-A posteriory, constructor-based, simple type checking for `JS`.
+> a posteriory simple type checking for `js` [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormtaylor/is).
 
-Implementation state : missing browser tests.
+**Implementation state** : missing browser tests.
 
 ## install
 
@@ -60,21 +58,30 @@ is( function(){ } );
 
 ## composing
 
-The function returns an object. The type mached by `what` you want to find out its nature returns itself. That is:
+The function returns an object. The type mached by `what` type returns itself. That is:
 
 ```js
 is(1).number
 // -> 1 (that is truthy)
 is([1,2,3]).array
 // -> [1,2,3] (truthy)
+is([1,2,3])
+// -> { object : true, array : [1,2,3] }
 ```
-
+so its very easy to compose
 ```js
 is(is([1,2,3]).array[1]).number
 // -> 1 (truthy)
 ```
 
-falsy values (such as `false`, `0` or `NaN`) are concatenated with a `string` so they become truthy
+and continue guessing as much as possible
+```js
+is(
+  is(
+    is([1,Infinity,3]).array[1] ).number ).Infinity
+```
+
+Something I don't know if I should change is how falsy values are handled (`false`, `0` or `NaN`). At the moment they are concatenated with a `string` so they become truthy
 
 ```js
 var arr = [false,0,NaN];
@@ -88,6 +95,8 @@ is(is(arr).array[1]).object
 is(is(arr).array[2]).number
 // 'NaN'     (truthy)
 ```
+
+though it might have some drawbacks I have to investigate.
 
 # todo
 

@@ -6,7 +6,7 @@
 [<img alt="build" src="http://img.shields.io/badge/node-%3E=0.6-green.svg?style=flat-square" align="right"/>](https://travis-ci.org/stringparser/utils-type/builds/34802928)
 
 ## utils-type
-> a posteriory simple type checking for `js` [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+> a posteriory simple type checking for `js` [<img alt="progressed.io" src="http://progressed.io/bar/78" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormtaylor/is).
 
@@ -32,8 +32,8 @@ is( 'a string');       // -> { string: 'a string' }
 is( /a regex/ );       // -> { object: true, regexp: /a regex/ } }
 is( function(){ } );   // -> { object: true, function: [Function] }
 is( { type : 'toy' }); // -> { object: { type: 'toy' } }
-is( new Date() );   // -> { object: true,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
-is( new Error() );  // -> { object: true, error: [Error] }
+is( new Date() );      // -> { object: true,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
+is( new Error() );     // -> { object: true, error: [Error] }
 
 // and more!
 is( new Stream() );

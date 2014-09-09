@@ -17,7 +17,6 @@ function is(what){
   }
 
   ctorName = (what.constructor.name || '');
-
   if( ctorName === '' || ctorName === 'Object' )
     ctorName = ({}).toString.call(what).match(/\w+/g)[1];
 
@@ -26,7 +25,7 @@ function is(what){
     leType.object = true;
     super_ = what.constructor.super_;
 
-    while(super_){ // utils.inherit pattern
+    while(super_){ // util.inherits pattern
       label = typeLabel(super_.name) || super_.name.toLowerCase();
       leType[ label ] = true;
       super_ = super_.constructor.super_;
@@ -36,10 +35,8 @@ function is(what){
   ctorName = ctorName.toLowerCase();
   ctorName = typeLabel(ctorName) || ctorName;
 
-  if(what)
-    leType[ctorName] = what;
-  else
-    leType[ctorName] = ''+what;
+  if(what) leType[ctorName] = what;
+  else     leType[ctorName] = ''+what;
 
   if(leType.object)
     return leType;

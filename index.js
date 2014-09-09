@@ -3,10 +3,11 @@
  * No labels by default or in test environment
  */
 
-function typeLabel(){
+var labels = { };
+function typeLabel(key, value){
 
   if(process.env.NODE_ENV !== 'test')
-    return require('utils-config')({ });
+    return value ? labels[key] = value : labels[key];
   else
     return void 0;
 }

@@ -20,8 +20,5 @@
   "bugs": {
     "url": "https://github.com/stringparser/utils-type/issues"
   },
-  "homepage": "https://github.com/stringparser/utils-type",
-  "dependencies": {
-    "utils-config": "^0.1.8"
-  }
+  "homepage": "https://github.com/stringparser/utils-type"
 }

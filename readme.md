@@ -30,9 +30,9 @@ is( NaN );
 is( null );
 // -> { null: true }
 is( true );
-// -> { boolean: true, true: true }
+// -> { boolean: true }
 is( false );
- // -> { boolean: 'false', false: true }
+ // -> { boolean: 'false' }
 is( Infinity );
 // -> { number: Infinity, infinity: true }
 is( undefined );

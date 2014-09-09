@@ -45,7 +45,7 @@ is( [ Math.E ] );
 // -> { object: true,  array: [ 2.718281828459045 ] }
 is( { type : 'toy' });
 // -> { object: { type: 'toy' } }
-is( new Date());
+is( new Date() );
 // -> { object: true,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
 is( new Error() );
 // -> { object: true, error: [Error] }
@@ -75,7 +75,7 @@ is(is([1,2,3]).array[1]).number
 // -> 1 (truthy)
 ```
 
-and continue guessing as much as possible
+and continue as much as possible
 ```js
 is(
   is(

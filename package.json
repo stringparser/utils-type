@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/stringparser/utils-type/issues"
   },
-  "homepage": "https://github.com/stringparser/utils-type"
+  "homepage": "https://github.com/stringparser/utils-type",
+  "devDependencies": {
+    "ansi-highlight": "^1.0.2"
+  }
 }

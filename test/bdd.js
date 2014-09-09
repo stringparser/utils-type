@@ -1,4 +1,5 @@
 
+var ansiJS = require('ansi-highlight');
 var timer, exitCode;
 
 function format(type, str, fn){
@@ -12,6 +13,8 @@ function format(type, str, fn){
 
   exitCode = exitCode === 1 ? 1 : (test === 'err' ? 1 : 0);
 
+  str = ansiJS(str);
+  
   if(str === void 0 || str === null || str.trim() === '')
     badge = ' (pending)';
   else if(test === 'passed')

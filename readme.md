@@ -31,7 +31,7 @@ is( undefined );       // -> { undefined: true }
 is( 'a string');       // -> { string: 'a string' }
 is( /a regex/ );       // -> { object: true, regexp: /a regex/ } }
 is( function(){ } );   // -> { object: true, function: [Function] }
-is( { type : 'toy' }); // -> { object: { type: 'toy' } }
+is({ type : 'toy' });  // -> { object: { type: 'toy' } }
 is( new Date() );      // -> { object: true,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
 is( new Error() );     // -> { object: true, error: [Error] }
 
@@ -51,16 +51,16 @@ is(1).number      // -> 1 (that is truthy)
 is([1,2,3]).array // -> [1,2,3] (truthy)
 is([1,2,3])       // -> { object : true, array : [1,2,3] }
 ```
-so its very easy to compose
+making easy to compose
 ```js
 is(is([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
-and continue as much as possible
+so, you know..., turtles all the way down!
 ```js
 is(
   is(
-    is([1,Infinity,3]).array[1] ).number ).Infinity
+      is([1,Infinity,3]).array[1] ).number ).Infinity
 ```
 
 Something I don't know if I should change is how falsy values are handled (`false`, `0` or `NaN`). At the moment they are concatenated with a `string` so they become truthy. Though this might have some drawbacks I will have to investigate.

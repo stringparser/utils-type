@@ -26,8 +26,8 @@ function is(what){
     super_ = what.constructor.super_;
 
     while(super_){ // util.inherits pattern
-      label = typeLabel(super_.name) || super_.name.toLowerCase();
-      leType[ label ] = true;
+      label = super_.name.toLowerCase();
+      leType[ typeLabel(label) || label ] = true;
       super_ = super_.constructor.super_;
     }
   }

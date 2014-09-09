@@ -1,5 +1,5 @@
 
-export NODE_ENV=test;
+export NODE_ENV=test_types;
 
 TESTS = test/test.*.js
 

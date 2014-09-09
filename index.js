@@ -52,13 +52,13 @@ function is(what){
 
 /*
  * No labels by default
- * No labels in test environment
+ * No labels in test_types environment
  */
 
 var labels = { };
 function typeLabel(key, value){
 
-  if(process.env.NODE_ENV !== 'test')
+  if(process.env.NODE_ENV !== 'test_types')
     return value ? labels[key] = value : labels[key];
   else
     return void 0;

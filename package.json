@@ -3,6 +3,9 @@
   "version": "0.1.12",
   "description": "constructor-based type checking",
   "main": "index.js",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
   "scripts": {
     "test": "make test"
   },
@@ -20,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/stringparser/utils-type/issues"
   },
-  "homepage": "https://github.com/stringparser/utils-type"
+  "homepage": "https://github.com/stringparser/utils-type",
+  "devDependencies": {
+    "ansi-highlight": "^1.0.2"
+  },
+  "dependencies": {
+    "utils-config": "^0.1.8"
+  }
 }

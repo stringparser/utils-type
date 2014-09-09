@@ -95,7 +95,7 @@ is(is(arr).array[2]).number
    * that is `is([1,2,3]).array[1].number > 0`
    * instead of what's the case now `is(is([1,2,3]).array[1]).number > 0`
  - [ ] Make browser tests
- - [ ] Make more server tests
+ - [X] Make more server tests (included `stream`, `event emitter`)
  - [ ] Provide a map so to rename `types`. Either because:
    * You like things your way.
    * It seems to be an issue for some environments to have a `function` property.

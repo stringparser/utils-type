@@ -21,40 +21,25 @@ Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormt
 ```js
 var is = require('utils-type');
 
-is( 0 );
-// -> { number: '0' }
-is( 42 );
-// -> { number: 42 }
-is( NaN );
-// -> { number: 'NaN', nan: true }
-is( null );
-// -> { null: true }
-is( true );
-// -> { boolean: true }
-is( false );
- // -> { boolean: 'false' }
-is( Infinity );
-// -> { number: Infinity, infinity: true }
-is( undefined );
-// -> { undefined: true }
-is( 'a string');
-// -> { string: 'a string' }
-is( /a regex/ );
-// -> { object: true, regexp: /a regex/ }
-is( [ Math.E ] );
-// -> { object: true,  array: [ 2.718281828459045 ] }
-is( { type : 'toy' });
-// -> { object: { type: 'toy' } }
-is( new Date() );
-// -> { object: true,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
-is( new Error() );
-// -> { object: true, error: [Error] }
+is( 42 );              // -> { number: 42 }
+is( NaN );             // -> { number: 'NaN', nan: true }
+is( null );            // -> { null: true }
+is( true );            // -> { boolean: true }
+is( false );           // -> { boolean: 'false' }
+is( Infinity );        // -> { number: Infinity, infinity: true }
+is( undefined );       // -> { undefined: true }
+is( 'a string');       // -> { string: 'a string' }
+is( /a regex/ );       // -> { object: true, regexp: /a regex/ } }
+is( function(){ } );   // -> { object: true, function: [Function] }
+is( { type : 'toy' }); // -> { object: { type: 'toy' } }
+is( new Date() );   // -> { object: true,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
+is( new Error() );  // -> { object: true, error: [Error] }
+
+// and more!
 is( new Stream() );
 // -> { object: true, eventemitter: true, stream: { domain: null, _events: {}, _maxListeners: 10 } }
 is( new EventEmitter() );
 // -> { object: true, eventemitter: { domain: null, _events: {}, _maxListeners: 10 } }
-is( function(){ } );
-// -> { object: true, function: [Function] }
 ```
 
 ### composing
@@ -62,17 +47,13 @@ is( function(){ } );
 The function returns an object. The type mached by `what` type returns itself. That is:
 
 ```js
-is(1).number
-// -> 1 (that is truthy)
-is([1,2,3]).array
-// -> [1,2,3] (truthy)
-is([1,2,3])
-// -> { object : true, array : [1,2,3] }
+is(1).number      // -> 1 (that is truthy)
+is([1,2,3]).array // -> [1,2,3] (truthy)
+is([1,2,3])       // -> { object : true, array : [1,2,3] }
 ```
 so its very easy to compose
 ```js
-is(is([1,2,3]).array[1]).number
-// -> 1 (truthy)
+is(is([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
 and continue as much as possible
@@ -87,15 +68,17 @@ Something I don't know if I should change is how falsy values are handled (`fals
 ```js
 var arr = [false,0,NaN];
 
-is(is(arr).array[0]).boolean
-// -> 'false'       (truthy)
-is(is(arr).array[1]).number
-// -> '0'           (truthy)
-is(is(arr).array[1]).object
-// -> undefined     (nope)
-is(is(arr).array[2]).number
-// 'NaN'     (truthy)
+is(is(arr).array[0]).boolean // -> 'false'       (truthy)
+is(is(arr).array[1]).number  // -> '0'           (truthy)
+is(is(arr).array[1]).object  // -> undefined     (nope)
+is(is(arr).array[2]).number  // 'NaN'     (truthy)
 ```
+
+### philosophy
+
+No specific method for each `class` is implemented. Instead use `constructor.name` and if is not present `({}).toString` to get the `[[Class]]`. This makes possible to find types/instances names all over the map with very little code.
+
+No booleans for the return value. An object is returned. True/false is achieved just by checking the existence of properties.
 
 ### test
 
@@ -112,7 +95,7 @@ is(is(arr).array[2]).number
    * It seems to be an issue for some environments to have a `function` property.
  - [ ] Maybe chain everything ?
    * that is `is([1,2,3]).array[1].number > 0`
-   * instead of what's the case now `is(is([1,2,3]).array[1]).number > 0`   
+   * instead of what's the case now `is(is([1,2,3]).array[1]).number > 0`
 
 ### license
 

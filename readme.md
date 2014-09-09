@@ -4,7 +4,7 @@
 [<img alt="NPM version" src="http://img.shields.io/npm/v/utils-type.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/utils-type)
 [<img alt="build" src="http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square" align="right"/>](https://travis-ci.org/stringparser/utils-type/builds)
 
-# utils-type
+## utils-type
 > a posteriory simple type checking for `js` [<img alt="progressed.io" src="http://progressed.io/bar/65" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormtaylor/is).
@@ -15,7 +15,7 @@ Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormt
 
     $ npm install utils-type
 
-# usage
+### usage
 
 ```js
 var is = require('utils-type');
@@ -56,7 +56,7 @@ is( function(){ } );
 // -> { object: true, function: [Function] }
 ```
 
-## composing
+### composing
 
 The function returns an object. The type mached by `what` type returns itself. That is:
 
@@ -96,9 +96,15 @@ is(is(arr).array[2]).number
 // 'NaN'     (truthy)
 ```
 
+### test
+
+    $ make test
+    or
+    $ npm test
+
 though it might have some drawbacks I have to investigate.
 
-# todo
+### todo
 
  - [ ] Maybe chain everything ?
    * that is `is([1,2,3]).array[1].number > 0`
@@ -109,12 +115,6 @@ though it might have some drawbacks I have to investigate.
    * You like things your way, sorter, different prop names.
    * It seems to be an issue for some environments to have a `function` property.
 
-# test
-
-    $ make test
-    or
-    $ npm test
-
-# license
+### license
 
 [<img alt="LICENSE" src="http://img.shields.io/npm/l/utils-type.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)

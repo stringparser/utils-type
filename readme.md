@@ -60,11 +60,24 @@ is( function(){ } );
 
 ## composing
 
-The function returns an object, so you can compose. No more booleans!
+The function returns an object. The type mached by `what` you want to find out its nature returns itself. That is:
 
 ```js
+is(1).number
+// -> 1 (that is truthy)
+is([1,2,3]).array
+// -> [1,2,3] (truthy)
+```
 
-var arr = [false,0,/heythere/];
+```js
+is(is([1,2,3]).array[1]).number
+// -> 1 (truthy)
+```
+
+falsy values (such as `false`, `0` or `NaN`) are concatenated with a `string` so they become truthy
+
+```js
+var arr = [false,0,NaN];
 
 is(is(arr).array[0]).boolean
 // -> 'false'       (truthy)
@@ -72,19 +85,8 @@ is(is(arr).array[1]).number
 // -> '0'           (truthy)
 is(is(arr).array[1]).object
 // -> undefined     (nope)
-is(is(arr).array[2]).regexp
-// /heythere/     (truthy)
-```
-
-## ternary what?
-
-`or` is enough
-
-```js
-var check = is([false,0,/heythere/]);
-var grab = is(check.array[0]).regexp  || /* -> undefined  */
-           is(check.array[1]).regexp  || /* -> undefined  */
-           is(check.array[2]).regexp     /* -> /heythere/ */;
+is(is(arr).array[2]).number
+// 'NaN'     (truthy)
 ```
 
 # todo
@@ -94,7 +96,9 @@ var grab = is(check.array[0]).regexp  || /* -> undefined  */
    * instead of what's the case now `is(is([1,2,3]).array[1]).number > 0`
  - [ ] Make browser tests
  - [ ] Make more server tests
- - [ ] Provide a map to rename `type`/`instances` names as properties since it seems to be an issue for some environments.
+ - [ ] Provide a map so to rename `types`. Either because:
+   * You like things your way.
+   * It seems to be an issue for some environments to have a `function` property.
 
 # test
 

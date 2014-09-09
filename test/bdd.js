@@ -12,7 +12,7 @@ function format(type, str, fn){
   }
 
   if(str === void 0 || str === null || str.trim() === '')
-    str += ' (pending)';
+    badge = ' (pending)';
   else if(test === 'passed')
     badge = ' \033[36m✓\033[0m ';
   else if(test === 'err')

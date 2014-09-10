@@ -47,6 +47,12 @@ function is(what){
   else if( what === Infinity )
     leType.infinity = true;
 
+  if(!leType.boolean){}
+  else if( what === true )
+    leType.true = true;
+  else if( what === false )
+    leType.false = true;
+
   return leType;
 }
 

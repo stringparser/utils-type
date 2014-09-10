@@ -7,19 +7,19 @@ function format(type, str, fn){
   var test, badge;
   try {
     test = (fn || function(){})() || 'passed';
-  } catch(e){
-    test = 'err';
+  } catch(err){
+    test = err;
   }
 
   exitCode = exitCode === 1 ? 1 : (test === 'err' ? 1 : 0);
 
   str = ansiJS(str);
-  
+
   if(str === void 0 || str === null || str.trim() === '')
     badge = ' (pending)';
   else if(test === 'passed')
     badge = '  \033[36m✔\033[0m  ';
-  else if(test === 'err')
+  else if(test instanceof Error)
     badge = '  \033[31m✗ ➜\033[0m ';
 
   if(type !== 'describe')

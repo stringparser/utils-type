@@ -40,7 +40,11 @@ function is(what){
 
 
   if(leType.object){
-    leType.types = Object.keys(leType).length;
+
+    var types = Object.keys(leType);
+    if( types.length > 1)
+      leType.types = types.join('|');
+
     return leType;
   }
 

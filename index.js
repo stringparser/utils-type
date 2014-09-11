@@ -38,8 +38,11 @@ function is(what){
   if(what) leType[ctorName] = what;
   else     leType[ctorName] = ''+what;
 
-  if(leType.object)
+
+  if(leType.object){
+    leType.types = Object.keys(leType).length;
     return leType;
+  }
 
   if(!leType.number){}
   else if( what !== what )

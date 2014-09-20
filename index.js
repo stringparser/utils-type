@@ -61,9 +61,9 @@ function is(what){
   else if( what === Infinity )
     leType.infinity = true;
   else if( parseInt(what+'') === what )
-    leType.integer = true;
+    leType.integer = what;
   else
-    leType.float = true;
+    leType.float = what;
 
   if(!leType.boolean){}
   else if( what === true )

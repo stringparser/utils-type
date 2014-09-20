@@ -36,7 +36,7 @@ function is(what){
   ctorName = typeLabel(ctorName) || ctorName;
 
   if(what) leType[ctorName] = what;
-  else     leType[ctorName] = ''+what;
+  else     leType[ctorName] = ''+what || 'empty string';
 
 
   if(leType.object){
@@ -53,6 +53,10 @@ function is(what){
     leType.nan = true;
   else if( what === Infinity )
     leType.infinity = true;
+  else if( (what+'').match('.') )
+    leType.float = true;
+  else
+    leType.integer = true;
 
   if(!leType.boolean){}
   else if( what === true )

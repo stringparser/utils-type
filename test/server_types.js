@@ -21,6 +21,10 @@ module.exports = (function(){
       type : ['number']
     },
     {
+      what : [1,2,3],
+      type : ['number', 'integer']
+    },
+    {
       what : { yep : 'yep' },
       type : ['object']
     },

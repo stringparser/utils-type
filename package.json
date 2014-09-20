@@ -1,6 +1,6 @@
 {
   "name": "utils-type",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "a posteriory simple type checking for js",
   "main": "index.js",
   "engines": {

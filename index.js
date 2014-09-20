@@ -53,10 +53,10 @@ function is(what){
     leType.nan = true;
   else if( what === Infinity )
     leType.infinity = true;
-  else if( (what+'').match('.') )
-    leType.float = true;
-  else
+  else if( parseInt(what+'') === what )
     leType.integer = true;
+  else
+    leType.float = true;
 
   if(!leType.boolean){}
   else if( what === true )

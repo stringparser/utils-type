@@ -16,8 +16,8 @@ function is(what){
     return leType;
   }
 
-  ctorName = (what.constructor.name || '');
-  if( ctorName === '' || ctorName === 'Object' )
+  ctorName = (what.constructor.name || null);
+  if( ctorName === null || ctorName === 'Object' )
     ctorName = ({}).toString.call(what).match(/\w+/g)[1];
 
   if( what === Object(what) ){
@@ -35,9 +35,16 @@ function is(what){
   ctorName = ctorName.toLowerCase();
   ctorName = typeLabel(ctorName) || ctorName;
 
-  if(what) leType[ctorName] = what;
-  else     leType[ctorName] = ''+what || 'empty string';
+  if(what){
+    leType[ctorName] = what;
+  } else {
+    leType[ctorName] = ''+what;
+  }
 
+  if( ((what+'').trim() || null) === null){
+    leType[ctorName] = { empty : true };
+    leType.empty = true;
+  }
 
   if(leType.object){
 

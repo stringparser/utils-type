@@ -45,8 +45,12 @@ module.exports = (function(){
       type : ['regexp', 'object']
     },
     {
-      what : 'a string',
+      what : ['a string', '', '     '],
       type : ['string']
+    },
+    {
+      what : ['', '      '],
+      type : ['string','empty']
     },
     {
       what : new Date(),

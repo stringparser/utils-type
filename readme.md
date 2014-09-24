@@ -71,7 +71,7 @@ var arr = [false,0,NaN];
 is(is(arr).array[0]).boolean // -> 'false'       (truthy)
 is(is(arr).array[1]).number  // -> '0'           (truthy)
 is(is(arr).array[1]).object  // -> undefined     (nope)
-is(is(arr).array[2]).number  // 'NaN'     (truthy)
+is(is(arr).array[2]).number  // -> 'NaN'         (truthy)
 ```
 
 ### philosophy

@@ -1,4 +1,3 @@
-
 var ansiJS = require('ansi-highlight');
 var timer, exitCode;
 
@@ -9,28 +8,33 @@ function format(type, str, fn){
     test = (fn || function(){})() || 'passed';
   } catch(err){
     test = err;
+    console.log();
+    console.log(err.stack);
   }
 
   exitCode = exitCode === 1 ? 1 : (test === 'err' ? 1 : 0);
 
   str = ansiJS(str);
 
-  if(str === void 0 || str === null || str.trim() === '')
+  if(str === void 0 || str === null || str.trim() === ''){
     badge = ' (pending)';
-  else if(test === 'passed')
+  } else if(test === 'passed'){
     badge = '  \033[36m✔\033[0m  ';
-  else if(test instanceof Error)
+  } else if(test instanceof Error){
     badge = '  \033[31m✗ ➜\033[0m ';
+  }
 
-  if(type !== 'describe')
+  if(type !== 'describe'){
     str = ' '+badge+str;
-  else if(exitCode === 1)
+  } else if(exitCode === 1){
     str = '   \033[31m►\033[0m  '+str;
-  else
+  } else {
     str = '   \033[36m►\033[0m  '+str;
+  }
 
-  if(timer)
+  if(timer){
     clearTimeout(timer);
+  }
 
   timer = setTimeout(function(){
     process.exit(exitCode);
@@ -47,7 +51,7 @@ function describe(/* arguments */){
     return ''+arg;
   }).join(' ');
 
-  process.stdout.write('   '+str)
+  process.stdout.write('   '+str);
   process.stdout.write(format('describe', str, fn));
 }
 exports.describe = describe;

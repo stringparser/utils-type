@@ -1,24 +1,19 @@
 
-/**
- * Exports
- */
-exports = module.exports = is;
-exports.typeLabel = typeLabel;
+exports = module.exports = type;
 
-/**
- * The actual function
- */
-function is(what){
+function type(what){
 
-  var leType = { }, ctorName, super_, label;
+  var leType = { };
+  var ctorName, super_;
   if( what === null || what === void 0 ) {
     leType[''+what] = true;
     return leType;
   }
 
   ctorName = (what.constructor.name || null);
-  if( ctorName === null || ctorName === 'Object' )
+  if( ctorName === null || ctorName === 'Object' ){
     ctorName = ({}).toString.call(what).match(/\w+/g)[1];
+  }
 
   if( what === Object(what) ){
 
@@ -26,64 +21,53 @@ function is(what){
     super_ = what.constructor.super_;
 
     while(super_){ // util.inherits pattern
-      label = super_.name.toLowerCase();
-      leType[ typeLabel(label) || label ] = true;
+      leType[ super_.name.toLowerCase() ] = true;
       super_ = super_.constructor.super_;
+    }
+
+    var types = Object.keys(leType);
+    if( types.length > 1){
+      leType.types = types.join('|');
+    } else {
+      leType.anObject = true;
     }
   }
 
   ctorName = ctorName.toLowerCase();
-  ctorName = typeLabel(ctorName) || ctorName;
 
-  if(what){
+  if( what ){
     leType[ctorName] = what;
   } else {
     leType[ctorName] = ''+what;
   }
 
-  if( ((what+'').trim() || null) === null){
-    leType[ctorName] = { empty : true };
+  if( !leType[ctorName] ){
+    leType[ctorName] = true;
     leType.empty = true;
   }
 
-  if(leType.object){
-
-    var types = Object.keys(leType);
-    if( types.length > 1)
-      leType.types = types.join('|');
-
-    return leType;
+  if(!leType.string){}
+  else if( !what.trim() ){
+    leType.empty = true;
   }
 
   if(!leType.number){}
-  else if( what !== what )
+  else if( what !== what ){
     leType.nan = true;
-  else if( what === Infinity )
+  } else if( what === Infinity ){
     leType.infinity = true;
-  else if( parseInt(what+'') === what )
+  } else if( parseInt(what+'') === what ){
     leType.integer = what;
-  else
+  } else {
     leType.float = what;
+  }
 
   if(!leType.boolean){}
-  else if( what === true )
+  else if( what === true ){
     leType.true = true;
-  else if( what === false )
+  } else if( what === false ){
     leType.false = true;
+  }
 
   return leType;
-}
-
-/*
- * No labels by default
- * No labels in test_types environment
- */
-
-var labels = { };
-function typeLabel(key, value){
-
-  if(process.env.NODE_ENV !== 'test_types')
-    return value ? labels[key] = value : labels[key];
-  else
-    return void 0;
 }

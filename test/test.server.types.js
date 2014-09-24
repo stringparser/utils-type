@@ -1,10 +1,14 @@
+
+'use strict';
+
 var is = require('../.');
 var types = require('./server_types');
 var assert = require('assert');
 var bdd = require('./bdd');
 
-var describe = bdd.describe;
+
 var it = bdd.it;
+var describe = bdd.describe;
 
 describe('utils-type:server', function(){
 
@@ -26,6 +30,15 @@ describe('utils-type:server', function(){
         typeList.forEach(function(typeWhat){
 
           it(typeWhat, ' should be {'+type+'}', function(){
+            if( !is(typeWhat)[type] ){
+              console.log(
+                '\n',
+                is(typeWhat),
+                type,
+                '`'+typeWhat+'`'
+              );
+            }
+
             assert( is(typeWhat)[type] );
           });
 

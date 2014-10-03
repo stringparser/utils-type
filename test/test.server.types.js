@@ -1,4 +1,3 @@
-
 'use strict';
 
 var is = require('../.');
@@ -21,7 +20,7 @@ describe('utils-type:server', function(){
 
       if(!Array.isArray(typeList)){
 
-        it(typeList, ' should be {'+type+'}', function(){
+        it('('+typeList+') should be {'+type+'}', function(){
           assert( is(typeList)[type] );
         });
 
@@ -29,7 +28,7 @@ describe('utils-type:server', function(){
 
         typeList.forEach(function(typeWhat){
 
-          it(typeWhat, ' should be {'+type+'}', function(){
+          it('('+typeList.join('),(')+') should be {'+type+'}', function(){
             if( !is(typeWhat)[type] ){
               console.log(
                 '\n',

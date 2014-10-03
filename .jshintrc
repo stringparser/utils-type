@@ -13,6 +13,5 @@
   "funcscope": true,
   "undef": true,
   "unused": true,
-  "node": true,
-  "mocha": true
+  "node": true
 }

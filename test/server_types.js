@@ -49,12 +49,16 @@ module.exports = (function(){
       type : ['string']
     },
     {
-      what : ['', '      '],
-      type : ['string','empty']
+      what : ['', '      ', null, undefined],
+      type : ['empty']
+    },
+    {
+      what : {},
+      type : ['object', 'plain']
     },
     {
       what : new Date(),
-      type : ['date', 'object']
+      type : ['object', 'date']
     },
     {
       what : Math,

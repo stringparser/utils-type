@@ -7,6 +7,8 @@ function type(what){
   var ctorName, super_;
   if( what === null || what === void 0 ) {
     leType[''+what] = true;
+    leType.empty = true;
+    leType.falsy = true;
     return leType;
   }
 
@@ -29,26 +31,22 @@ function type(what){
     if( types.length > 1){
       leType.types = types.join('|');
     } else {
-      leType.anObject = true;
+      leType.plain = true;
     }
   }
 
   ctorName = ctorName.toLowerCase();
 
-  if( what ){
-    leType[ctorName] = what;
-  } else {
-    leType[ctorName] = ''+what;
-  }
-
-  if( !leType[ctorName] ){
-    leType[ctorName] = true;
-    leType.empty = true;
-  }
+  leType[ctorName] = what || what+'' || true;
+  leType[ctorName].falsy = !what || false;
 
   if(!leType.string){}
   else if( !what.trim() ){
     leType.empty = true;
+  }
+
+  if(leType.object){
+    return leType;
   }
 
   if(!leType.number){}
@@ -58,6 +56,7 @@ function type(what){
     leType.infinity = true;
   } else if( parseInt(what+'') === what ){
     leType.integer = what;
+    leType.zero = !what || false;
   } else {
     leType.float = what;
   }
@@ -66,6 +65,7 @@ function type(what){
   else if( what === true ){
     leType.true = true;
   } else if( what === false ){
+    leType.boolean = true;
     leType.false = true;
   }
 

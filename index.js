@@ -37,11 +37,11 @@ function type(what){
 
   ctorName = ctorName.toLowerCase();
 
-  leType[ctorName] = what || what+'' || true;
+  leType[ctorName] = what || what+' ';
   leType[ctorName].falsy = !what || false;
 
-  if(!leType.string){}
-  else if( !what.trim() ){
+  if( leType.string && !leType.string.trim() ){
+    leType.string = ' ';
     leType.empty = true;
   }
 
@@ -49,24 +49,22 @@ function type(what){
     return leType;
   }
 
-  if(!leType.number){}
+  if( !leType.number ){ }
   else if( what !== what ){
     leType.nan = true;
   } else if( what === Infinity ){
     leType.infinity = true;
   } else if( parseInt(what+'') === what ){
     leType.integer = what;
-    leType.zero = !what || false;
   } else {
-    leType.float = what;
+    leType.float = what || true;
   }
 
-  if(!leType.boolean){}
-  else if( what === true ){
-    leType.true = true;
-  } else if( what === false ){
-    leType.boolean = true;
+  if(leType.falsy && !leType.boolean){
     leType.false = true;
+    leType.boolean = true;
+  } else if( what === true ){
+    leType.true = true;
   }
 
   return leType;

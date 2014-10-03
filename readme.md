@@ -63,10 +63,10 @@ is(
       is([1,Infinity,3]).array[1] ).number ).Infinity
 ```
 
-Something I don't know if I should change is how falsy values are handled (`false`, `0` or `NaN`). At the moment they are concatenated with a `string` so they become truthy. Though this might have some drawbacks I will have to investigate.
+### beware of falsy values
 
 ```js
-var arr = [false,0,NaN];
+var arr = [false, 0, NaN, ''];
 
 is(is(arr).array[0]).boolean // -> 'false'       (truthy)
 is(is(arr).array[1]).number  // -> '0'           (truthy)

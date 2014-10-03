@@ -54,7 +54,7 @@ module.exports = (function(){
     },
     {
       what : {},
-      type : ['object', 'plain']
+      type : ['object', 'plainObject']
     },
     {
       what : new Date(),

@@ -47,9 +47,9 @@ describe('utils-type:server', function(){
     });
   });
 
-  it('[NaN] should be a {number} and have "nan" property', function(){
+  it('[NaN] should NOT be a {number} and have "nan" property', function(){
     var type = is(NaN);
-    assert( type.number && type.nan );
+    assert( !type.number && type.nan );
   });
 
   it('[Infinity] should be a {number} and have "infinity" property', function(){

@@ -31,7 +31,7 @@ function type(what){
     if( types.length > 1){
       leType.types = types.join('|');
     } else {
-      leType.plain = true;
+      leType.plainObject = what;
     }
   }
 
@@ -51,10 +51,13 @@ function type(what){
 
   if( !leType.number ){ }
   else if( what !== what ){
+    delete leType.number;
     leType.nan = true;
   } else if( what === Infinity ){
     leType.infinity = true;
   } else if( parseInt(what+'') === what ){
+    leType.zero = !what || false;
+    leType.number = what;
     leType.integer = what;
   } else {
     leType.float = what || true;

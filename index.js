@@ -56,11 +56,10 @@ function type(what){
   } else if( what === Infinity ){
     leType.infinity = true;
   } else if( parseInt(what+'') === what ){
-    leType.zero = !what || false;
-    leType.number = what;
+    leType.number = what || true;
     leType.integer = what;
   } else {
-    leType.float = what || true;
+    leType.float = what;
   }
 
   if(leType.falsy && !leType.boolean){

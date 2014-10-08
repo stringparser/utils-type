@@ -38,7 +38,7 @@ function type(what){
   };
 
   if( leType.object && !types[1] ){
-    leType.plainObject = true;
+    leType.plainObject = what;
   }
 
   if(leType.object){

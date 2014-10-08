@@ -33,6 +33,10 @@ function type(what){
   var types = Object.keys(leType);
   leType.types = types.join(' ');
 
+  leType.match = function typeMatch(re){
+    return this.types.match(re);
+  };
+
   if( leType.object && !types[1] ){
     leType.plainObject = true;
   }

@@ -28,22 +28,22 @@ function type(what){
       leType[ super_.name.toLowerCase() ] = true;
       super_ = super_.constructor.super_;
     }
+  }
 
-    var types = Object.keys(leType);
-    if( types.length > 1){
-      leType.types = types.join('|');
-    } else {
-      leType.plainObject = what;
-    }
+  var types = Object.keys(leType);
+  leType.types = types.join(' ');
+
+  if( leType.object && !types[1] ){
+    leType.plainObject = true;
+  }
+
+  if(leType.object){
+    return leType;
   }
 
   if( leType.string && !leType.string.trim() ){
     leType.string = ' ';
     leType.empty = true;
-  }
-
-  if(leType.object){
-    return leType;
   }
 
   if( !leType.number ){ }

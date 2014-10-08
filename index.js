@@ -8,7 +8,6 @@ function type(what){
   if( what === null || what === void 0 ) {
     leType[''+what] = true;
     leType.empty = true;
-    leType.falsy = true;
     return leType;
   }
 
@@ -16,6 +15,9 @@ function type(what){
   if( ctorName === null || ctorName === 'Object' ){
     ctorName = ({}).toString.call(what).match(/\w+/g)[1];
   }
+
+  ctorName = ctorName.toLowerCase();
+  leType[ctorName] = what || what+' ';
 
   if( what === Object(what) ){
 
@@ -34,11 +36,6 @@ function type(what){
       leType.plainObject = what;
     }
   }
-
-  ctorName = ctorName.toLowerCase();
-
-  leType[ctorName] = what || what+' ';
-  leType[ctorName].falsy = !what || false;
 
   if( leType.string && !leType.string.trim() ){
     leType.string = ' ';

@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = { };
-_.isEmpty = require('lodash.isempty');
 _.isObject = require('lodash.isobject');
 _.isPlainObject = require('lodash.isplainobject');
 
@@ -27,8 +26,7 @@ function type(what){
   }
 
   var strRep = what + ' ';
-  var ctorName = leType.types;
-  leType[ctorName] = what || strRep;
+  leType[leType.types] = what || strRep;
 
   // array, function, regexp, object
   if( _.isObject(what) ){
@@ -74,10 +72,6 @@ function type(what){
     leType.nan = true;
   } else if( what === Infinity ){
     leType.infinity = Infinity;
-  }
-
-  if( !leType.empty ){
-    delete leType.empty;
   }
 
   return leType;

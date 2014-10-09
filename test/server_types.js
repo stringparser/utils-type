@@ -35,7 +35,7 @@ module.exports = (function(){
     },
     {
       what : [function(a,b){    }],
-      type : ['function', 'object', 'empty']
+      type : ['function', 'object']
     },
     {
       what : [new Error()],
@@ -43,16 +43,16 @@ module.exports = (function(){
     },
     {
       what : [new RegExp()],
-      type : ['regexp', 'object', 'empty']
+      type : ['regexp', 'object']
     },
     {
       what : ['a string', '', '     '],
       type : ['string']
     },
-    {
+/*    {
       what : ['', '      ', null, undefined, function(a,b){   }, 0, NaN, { }],
       type : ['empty']
-    },
+    },*/
     {
       what : {},
       type : ['object', 'plainObject']

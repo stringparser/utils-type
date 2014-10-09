@@ -16,10 +16,13 @@ function type(what){
     }
   };
 
-  if( what === void 0 || what === null ) {
+  if( leType.match(/null|undefined|arguments/g) ) {
     leType[leType.types] = true;
-    leType.empty = true;
-    leType.types += ' empty';
+    if( leType.match(/arguments/g) ){
+      leType.object = true;
+      leType.arguments = what;
+      leType.types = 'object '+leType.types;
+    }
     return leType;
   }
 
@@ -40,37 +43,24 @@ function type(what){
       leType.types = 'object '+leType.types;
     }
 
-    // isEmpty
-    leType.empty = !leType.function
-      ? _.isEmpty(what)
-      : !what.toString('utf8')
-          .replace(/[ ]+|\n/g, '')
-          .match(/.*{(.*)}/)[1].trim();
-
-    if( leType.empty ){
-      leType.types += ' empty';
-    } else {
-      delete leType.empty;
-    }
-
+    var name;
     var super_ = what.constructor.super_;
     while(super_){ // util.inherits pattern
-      var name = super_.name.toLowerCase();
+      name = super_.name.toLowerCase();
       leType[name] = true;
       leType.types += ' '+name;
       super_ = super_.constructor.super_;
     }
     super_ = null;
+    name = null;
     return leType;
   }
 
   // string, boolean, number
-  if( leType.string || leType.boolean ){
-    leType.empty = !!leType.boolean || !what.trim();
+  if( leType.match(/string|boolean/g) ){
     return leType;
   }
 
-  leType.empty = !what;
   leType.number = what || true;
 
   if( parseInt(strRep) === what ){

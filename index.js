@@ -83,8 +83,7 @@ var __toString = __.toString;
 function getCtorName(thing){
 
   if( thing === void 0 || thing === null ){
-    return __toString.call(thing)
-      .match(/\w+/g)[1].toLowerCase();
+    return thing+'';
   }
 
   var ctorName = thing.constructor.name;

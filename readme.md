@@ -8,7 +8,7 @@
 ## utils-type
 > a posteriory simple type checking for `js` [<img alt="progressed.io" src="http://progressed.io/bar/78" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
-Heavily inspired by api design of [ianstorm's `is`](https://github.com/ianstormtaylor/is).
+A more robust type checking for js
 
 **Implementation state** : missing browser tests.
 

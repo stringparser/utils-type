@@ -1,7 +1,7 @@
 {
   "name": "utils-type",
-  "version": "0.5.1",
-  "description": "a posteriory simple type checking for js",
+  "version": "0.5.2",
+  "description": "a more robust type checking for js",
   "main": "index.js",
   "engines": {
     "node": ">= 0.6.0"
@@ -28,7 +28,6 @@
     "ansi-highlight": "^1.0.2"
   },
   "dependencies": {
-    "lodash.isempty": "^2.4.1",
     "lodash.isobject": "^2.4.1",
     "lodash.isplainobject": "^2.4.1"
   }

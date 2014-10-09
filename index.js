@@ -32,11 +32,12 @@ function type(what){
     // ^ avoids V8 bug. Got it from lodash source
     // https://github.com/lodash/lodash/blob/2.4.1/dist/lodash.compat.js#L2757-L2758
     // http://code.google.com/p/v8/issues/detail?id=2291
-
     leType.object = true;
     if( _.isPlainObject(what) ){
       leType.plainObject = what;
       leType.types += ' plainObject';
+    } else {
+      leType.types = 'object '+leType.types;
     }
 
     // isEmpty
@@ -44,7 +45,7 @@ function type(what){
       ? _.isEmpty(what)
       : !what.toString('utf8')
           .replace(/[ ]+|\n/g, '')
-          .match(/.*{(.*)}/)[1].trim() || false;
+          .match(/.*{(.*)}/)[1].trim();
 
     if( leType.empty ){
       leType.types += ' empty';
@@ -60,20 +61,16 @@ function type(what){
       super_ = super_.constructor.super_;
     }
     super_ = null;
-
     return leType;
   }
 
   // string, boolean, number
-
   if( leType.string || leType.boolean ){
-    leType.empty = leType.string
-      ? !what.trim() || false
-      : true;
+    leType.empty = !!leType.boolean || !what.trim();
     return leType;
   }
 
-  leType.empty = !what || false;
+  leType.empty = !what;
   leType.number = what || true;
 
   if( parseInt(strRep) === what ){
@@ -89,6 +86,10 @@ function type(what){
     leType.infinity = Infinity;
   }
 
+  if( !leType.empty ){
+    delete leType.empty;
+  }
+
   return leType;
 }
 
@@ -98,12 +99,14 @@ var __toString = __.toString;
 function getCtorName(thing){
 
   if( thing === void 0 || thing === null ){
-    return __toString.call(thing).match(/\w+/g)[1].toLowerCase();
+    return __toString.call(thing)
+      .match(/\w+/g)[1].toLowerCase();
   }
 
   var ctorName = thing.constructor.name;
   if( ctorName === 'Object' ){
-    return __toString.call(thing).match(/\w+/g)[1].toLowerCase();
+    return __toString.call(thing)
+      .match(/\w+/g)[1].toLowerCase();
   }
   return ctorName.toLowerCase();
 }

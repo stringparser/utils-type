@@ -26,15 +26,15 @@ module.exports = (function(){
     },
     {
       what : { yep : 'yep' },
-      type : ['object']
+      type : ['object', 'plainObject']
     },
     {
       what : arguments,
       type : ['arguments', 'object']
     },
     {
-      what : [function(){}],
-      type : ['function', 'object']
+      what : [function(a,b){    }],
+      type : ['function', 'object', 'empty']
     },
     {
       what : [new Error()],
@@ -42,14 +42,14 @@ module.exports = (function(){
     },
     {
       what : [new RegExp()],
-      type : ['regexp', 'object']
+      type : ['regexp', 'object', 'empty']
     },
     {
       what : ['a string', '', '     '],
       type : ['string']
     },
     {
-      what : ['', '      ', null, undefined],
+      what : ['', '      ', null, undefined, function(a,b){   }, 0, NaN, { }],
       type : ['empty']
     },
     {

@@ -28,7 +28,7 @@ describe('utils-type:server', function(){
 
         typeList.forEach(function(typeWhat){
 
-          it('('+typeList.join('),(')+') should be {'+type+'}', function(){
+          it('('+typeWhat+') should be {'+type+'}', function(){
             if( !is(typeWhat)[type] ){
               console.log(
                 '\n',

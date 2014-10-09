@@ -11,7 +11,10 @@
   "maxlen": 80,
   "eqnull": true,
   "funcscope": true,
+  "strict": true,
+  "globalstrict": true,
   "undef": true,
   "unused": true,
-  "node": true
+  "node": true,
+  "laxbreak": true
 }

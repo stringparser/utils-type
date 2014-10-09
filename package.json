@@ -26,5 +26,10 @@
   "homepage": "https://github.com/stringparser/utils-type",
   "devDependencies": {
     "ansi-highlight": "^1.0.2"
+  },
+  "dependencies": {
+    "lodash.isempty": "^2.4.1",
+    "lodash.isobject": "^2.4.1",
+    "lodash.isplainobject": "^2.4.1"
   }
 }

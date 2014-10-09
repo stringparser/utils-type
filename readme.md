@@ -63,12 +63,6 @@ type(
       type([1,Infinity,3]).array[1] ).number).Infinity
 ```
 
-### philosophy
-
-No specific method for each `class` is implemented. Instead use `constructor.name` and if is not present `({}).toString` to get the `[[Class]]`. This makes possible to find types/instances names all over the map with very little code.
-
-No booleans for the return value. An object is returned. True/false is achieved just by checking the existence of properties.
-
 #### falsy values
 
 Falsy values are made true when it makes sense based on their use
@@ -87,6 +81,12 @@ Why:
  - `0` is a number yes, but if is changed to true you can't add to it after the function returns.
  - `NaN` is not a number :D
  - `the empty string` is kept as an space so checks and operations can be done.
+
+### philosophy
+
+No specific method for each `class` is implemented. Instead use `constructor.name` and if is not present `({}).toString` to get the `[[Class]]`. This makes possible to find types/instances names all over the map with very little code.
+
+No booleans for the return value. An object is returned. True/false is achieved just by checking the existence of properties.
 
 ### test
 

@@ -9,7 +9,6 @@ var _ = { isPlainObject : require('lodash.isplainobject') };
  * exports.getCtorName = getCtorName;
  */
 
-
 function type(what){
 
   var strRep = what + '';

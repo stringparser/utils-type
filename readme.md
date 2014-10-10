@@ -6,7 +6,7 @@
 [<img alt="build" src="http://img.shields.io/badge/node-%3E=0.6-green.svg?style=flat-square" align="right"/>](https://travis-ci.org/stringparser/utils-type/builds/34802928)
 
 ## utils-type
-> a posteriory simple type checking for `js` [<img alt="progressed.io" src="http://progressed.io/bar/78" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
+[<img alt="progressed.io" src="http://progressed.io/bar/78" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
 Robust type checking for js
 

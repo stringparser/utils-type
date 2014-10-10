@@ -2,13 +2,21 @@
 
 var _ = { isPlainObject : require('lodash.isplainobject') };
 
+/**
+ * exports below
+ * ----------------
+ * module.exports = type;
+ * exports.getCtorName = getCtorName;
+ */
+
+
 function type(what){
 
   var strRep = what + '';
   var leType = { types : getCtorName(what) };
   leType[leType.types] = what || !!strRep || ' ';
 
-  // pritives
+  // primitives
   if( (/undefined|null|string|number|boolean|symbol/).test(leType.types) ) {
     if( leType.number ){
       if( parseInt(strRep) === what ){

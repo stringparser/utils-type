@@ -1,6 +1,6 @@
 {
   "name": "utils-type",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "robust type checking for js",
   "main": "index.js",
   "engines": {

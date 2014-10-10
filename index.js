@@ -12,12 +12,13 @@ var _ = { isPlainObject : require('lodash.isplainobject') };
 function type(what){
 
   var strRep = what + '';
-  var leType = { types : getCtorName(what) };
+  var leType = { types : getCtorName(what, strRep) };
   leType[leType.types] = what || !!strRep || ' ';
 
   // primitives
   if( (/undefined|null|string|number|boolean|symbol/).test(leType.types) ) {
     if( leType.number ){
+      leType.number = true;
       if( parseInt(strRep) === what ){
         leType.integer = what;
         leType.types += ' integer';
@@ -35,7 +36,7 @@ function type(what){
   }
 
   // everything else is an object
-  leType.object = what;
+  leType.object = true;
   if( _.isPlainObject(what) ){
     leType.plainObject = what;
     leType.types += ' plainObject';
@@ -62,10 +63,10 @@ exports = module.exports = type;
 var __ = ({ });
 var __toString = __.toString;
 
-function getCtorName(thing){
+function getCtorName(thing, strRep){
 
   if( thing === void 0 || thing === null ){
-    return thing+'';
+    return strRep;
   }
 
   var ctorName = thing.constructor.name;

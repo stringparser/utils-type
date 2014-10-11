@@ -6,7 +6,6 @@
     "node": ">= 0.4.0"
   },
   "devDependencies": {
-    "jshint": "*",
     "mocha": "*",
     "should": "*"
   },
@@ -18,7 +17,7 @@
   "license": "MIT",
   "bugs": { "url": "https://github.com/stringparser/utils-type/issues"  },
   "scripts": {
-    "lint": "jshint index.js",
-    "test": "npm run-script lint && mocha --reporter spec test/_main.js"
+    "lint": "jshint index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
+    "test": "mocha --reporter spec test/_main.js"
   }
 }

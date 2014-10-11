@@ -72,7 +72,7 @@ type(
                     .array[0])
                       .array[0])
                         .array[0])
-                          .array[0]).Infinity
+                          .array[0]).Infinity // => Infinity
 ```
 
 #### falsy values

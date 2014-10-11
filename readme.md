@@ -3,7 +3,15 @@
 [<img alt="build" src="http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/utils-type/builds)
 [<img alt="NPM version" src="http://img.shields.io/npm/v/utils-type.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/utils-type)
 <br><br>
-Robust type checking
+
+Robust type checking.
+
+<table>
+<tr>
+<td>Node Version</td>
+<td>>= 0.8</td>
+</tr>
+</table>
 <br>
 
 **Implementation state** : missing browser tests.

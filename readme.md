@@ -67,12 +67,13 @@ type(
       type(
         type(
           type([[[/*...*/[[[Infinity]]]/*...*/]]]))
-                .array[0])
-                  .array[0])
-                    .array[0])
-                      .array[0])
-                        .array[0])
-                          .array[0]).Infinity // => Infinity
+                                            .array[0])
+                                              .array[0])
+                                                .array[0])
+                                                  .array[0])
+                                                    .array[0])
+                                                      .array[0]).Infinity
+                                                                // => Infinity;
 ```
 
 #### falsy values

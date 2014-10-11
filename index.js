@@ -18,11 +18,11 @@ function type(_src){
   // primitives
   if( (primitive).test(types) ) {
     if( leType.number ){
-      strRep = strRep || src+'';
+      strRep = strRep || src + '';
       if( parseInt(strRep) === src ){
         types += ' integer';
         leType.integer = src;
-      } else if ( (/\./g).test(strRep) ){
+      } else if ( (/\./).test(strRep) ){
         types += ' float';
         leType.float = src;
       } else if( src !== src ){
@@ -30,8 +30,8 @@ function type(_src){
         leType.nan = true;
         delete leType.number;
       } else if( src === Infinity ){
-        leType.infinity = src;
         types += ' infinity';
+        leType.infinity = src;
       }
     }
     strRep = ctorName = super_ = null; // clean up
@@ -53,10 +53,11 @@ function type(_src){
     return leType;
   }
 
+  // util.inherits pattern
   var super_ = _src.constructor.super_;
-  while(super_){ // inheritance pattern
+  while(super_){
     ctorName = super_.name.toLowerCase();
-    leType[ctorName] = src;
+    leType[ctorName] = true;
     types += ' ' + ctorName;
     super_ = super_.constructor.super_;
   }

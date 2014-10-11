@@ -5,6 +5,7 @@
 <br><br>
 
 Robust type checking.
+
 [<img alt="browser support" src="http://ci.testling.com/stringparser/utils-type.png" align="right"/>](http://ci.testling.com/stringparser/utils-type)
 <table>
 <tr>

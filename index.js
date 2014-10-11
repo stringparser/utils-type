@@ -43,7 +43,7 @@ function type(_src){
   if ( !leType.object ) {
     leType.object = src;
     types = 'object ' + types;
-  } else if( !ctorName.match(types) ){
+  } else if( !(new RegExp(ctorName)).test(types) ){
     leType[ctorName] = src;
     types += ' ' + ctorName;
   } else {

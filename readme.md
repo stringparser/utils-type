@@ -63,7 +63,16 @@ so, you know..., turtles all the way down!
 ```js
 type(
   type(
-      type([1,Infinity,3]).array[1] ).number).Infinity
+    type(
+      type(
+        type(
+          type([[[/*...*/[[[Infinity]]]/*...*/]]]))
+                .array[0])
+                  .array[0])
+                    .array[0])
+                      .array[0])
+                        .array[0])
+                          .array[0]).Infinity
 ```
 
 #### falsy values

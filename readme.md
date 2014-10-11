@@ -13,7 +13,7 @@ Robust type checking.
 </tr>
 </table>
 
-**Implementation state** : missing browser tests.
+[<img alt="browser support" src="http://ci.testling.com/stringparser/utils-type.png" align="right"/>](http://ci.testling.com/stringparser/utils-type)
 
 ## install
 

@@ -41,7 +41,7 @@ describe('utils-type:server', function(){
         it('should type('+value+').match(/'+typeChecks.join('|')+'/g) = '+value,
           function(){
           var re = new RegExp(typeChecks.join('|'),'g');
-          if( !Number.isNaN(value) ){
+          if( value === value ){
             should(type(value).match(re))
               .be.eql(value);
           } else {

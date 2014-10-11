@@ -22,7 +22,7 @@ module.exports = (function(){
       type : ['number']
     },
     {
-      what : [1,2,3],
+      what : [-3,-2,-1,1,2,3],
       type : ['number', 'integer']
     },
     {
@@ -32,6 +32,10 @@ module.exports = (function(){
     {
       what : arguments,
       type : ['arguments', 'object']
+    },
+    {
+      what : [[1,2,3]],
+      type : ['object', 'array']
     },
     {
       what : [function(a,b){    }],

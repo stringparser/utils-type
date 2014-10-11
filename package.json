@@ -1,6 +1,6 @@
 {
   "name": "utils-type",
-  "version": "0.6.6",
+  "version": "0.7.0",
   "description": "robust type checking for js",
   "main": "index.js",
   "engines": {
@@ -23,11 +23,5 @@
   "bugs": {
     "url": "https://github.com/stringparser/utils-type/issues"
   },
-  "homepage": "https://github.com/stringparser/utils-type",
-  "devDependencies": {
-    "ansi-highlight": "*"
-  },
-  "dependencies": {
-    "lodash.isplainobject": "*"
-  }
+  "homepage": "https://github.com/stringparser/utils-type"
 }

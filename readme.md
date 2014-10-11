@@ -1,14 +1,10 @@
-#
+# utils-type [<img alt="progressed.io" src="http://progressed.io/bar/80" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
 
-[<img alt="npm downloads" src="http://img.shields.io/npm/dm/utils-type.svg?style=flat-square" align="right"/>](http://img.shields.io/npm/dm/utils-type.svg)
+[<img alt="build" src="http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/utils-type/builds)
 [<img alt="NPM version" src="http://img.shields.io/npm/v/utils-type.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/utils-type)
-[<img alt="build" src="http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square" align="right"/>](https://travis-ci.org/stringparser/utils-type/builds)
-[<img alt="build" src="http://img.shields.io/badge/node-%3E=0.6-green.svg?style=flat-square" align="right"/>](https://travis-ci.org/stringparser/utils-type/builds/34802928)
-
-## utils-type
-[<img alt="progressed.io" src="http://progressed.io/bar/78" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
-
-Robust type checking for js
+<br><br>
+Robust type checking
+<br>
 
 **Implementation state** : missing browser tests.
 

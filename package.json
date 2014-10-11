@@ -1,7 +1,7 @@
 {
   "name": "utils-type",
   "main": "index.js",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -19,5 +19,13 @@
   "scripts": {
     "lint": "jshint index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
     "test": "mocha --reporter spec test/_main.js"
-  }
+  },
+  "testling": {
+    "browsers": [
+        "ie6", "ie7", "ie8", "ie9",
+        "firefox/15", "chrome/22", "opera/12", "safari/5.1"
+    ],
+    "harness" : "mocha",
+    "files": "test/_main.js"
+  },
 }

@@ -1,27 +1,25 @@
 {
   "name": "utils-type",
-  "version": "0.7.0",
-  "description": "robust type checking for js",
   "main": "index.js",
+  "version": "0.8.0",
   "engines": {
     "node": ">= 0.6.0"
   },
-  "scripts": {
-    "test": "make test"
+  "devDependencies": {
+    "jshint": "*",
+    "jshint-stylish": "*",
+    "mocha": "*",
+    "should": "*"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/stringparser/utils-type"
-  },
-  "keywords": [
-    "utils",
-    "type",
-    "constructor"
-  ],
   "author": "Javier Carrillo",
+  "description": "robust type checking for js",
+  "repository": "stringparser/utils-type",
+  "homepage": "https://github.com/stringparser/utils-type",
+  "keywords": [ "utils", "type", "constructor" ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/stringparser/utils-type/issues"
-  },
-  "homepage": "https://github.com/stringparser/utils-type"
+  "bugs": { "url": "https://github.com/stringparser/utils-type/issues"  },
+  "scripts": {
+    "lint": "jshint index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
+    "test": "npm run-script lint && mocha --reporter spec test/_main.js"
+  }
 }

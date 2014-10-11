@@ -16,5 +16,6 @@
   "undef": true,
   "unused": true,
   "node": true,
+  "mocha" : true,
   "laxbreak": true
 }

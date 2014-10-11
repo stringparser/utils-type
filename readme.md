@@ -12,7 +12,6 @@ Robust type checking.
 <td>>= 0.8</td>
 </tr>
 </table>
-<br>
 
 **Implementation state** : missing browser tests.
 

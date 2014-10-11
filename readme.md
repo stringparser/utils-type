@@ -4,13 +4,12 @@
 [<img alt="NPM version" src="http://img.shields.io/npm/v/utils-type.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/utils-type)
 <br><br>
 
-Robust type checking.
+Robust type checking. [<img alt="browser support" src="http://ci.testling.com/stringparser/utils-type.png" align="right"/>](http://ci.testling.com/stringparser/utils-type)
 <table>
 <tr>
 <td>Node Version</td>
 <td>>= 0.8</td>
 </tr>
-<tr> [<img alt="browser support" src="http://ci.testling.com/stringparser/utils-type.png" align="right"/>](http://ci.testling.com/stringparser/utils-type)</tr>
 </table>
 
 ## install

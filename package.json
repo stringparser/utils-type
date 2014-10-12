@@ -1,7 +1,7 @@
 {
   "name": "utils-type",
   "main": "index.js",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "engines": {
     "node": ">= 0.8.0"
   },

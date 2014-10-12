@@ -8,12 +8,13 @@ var server = { };
 describe('utils-type:server', function(){
 
   var types = server.testSuite.types;
-  describe('type(value) should have property {typeName} returning (value || true)', function(){
+  describe('type(value) should have property {typeName}', function(){
     types.forEach(function(typeUnit){
       var typeList = typeUnit.src;
       var typeChecks = typeUnit.check;
       typeList.forEach(function(value){
-        it('type('+value+') to have property {'+typeChecks.join('}, {')+'}', function(){
+        it('type('+value+') to have prop {'+typeChecks.join('}, {')+'}',
+          function(){
           typeChecks.forEach(function(typeName, index){
             if( typeName === 'integer' ){
               should(type(value))
@@ -42,10 +43,9 @@ describe('utils-type:server', function(){
           function(){
           var re = new RegExp(typeChecks.join('|'),'g');
           if( value === value ){
-            should(type(value).match(re))
-              .be.eql(value);
+            should(type(value).match(re)).be.eql(value);
           } else {
-            should(type(value).match(re)).be.eql(true);
+            should(type(value).match(re)).not.be.eql(value);
           }
         });
       });
@@ -79,7 +79,11 @@ describe('utils-type:server', function(){
             if( typeChecks.indexOf(typeName) > -1 ){ return ; }
             it('type('+value+').match(/'+typeName+'/) should === null',
               function(){
-                should(type(value).match(typeName)).be.eql(null);
+                if( value === value ){
+                  should(type(value).match(typeName)).be.eql(null);
+                } else {
+                  should(type(value).match(typeName)).not.be.eql(NaN);
+                }
               });
         });
       });

@@ -26,9 +26,7 @@ function type(_src){
         types += ' float';
         leType.float = src;
       } else if( src !== src ){
-        src = true;
         types = 'nan';
-        // ^ match gets screwed otherwise
         leType.nan = true;
         delete leType.number;
       } else if( src === Infinity ){

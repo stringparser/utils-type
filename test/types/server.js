@@ -38,7 +38,7 @@ module.exports.types = (function(){
       check : ['number', 'integer']
     },
     {
-        src : [ -3.3, -2.2, -1.1, 1.01, 2.1, 3.2, Math.E, Math.PI],
+        src : [ -3.3, -2.2, -1.1, 1.01, 2.1, Math.E, Math.PI],
       check : ['number', 'float']
     },
     {

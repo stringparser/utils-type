@@ -12,7 +12,7 @@ function type(_src){
 
   leType[types] = src || Boolean(strRep = src+'') || ' ';
   leType.match  = function typeMatch(re){
-    return (new RegExp(re)).test(types) ? src : null;
+    return (new RegExp(re)).test(types) ? src || Boolean(src+'') || ' ' : null;
   };
 
   // primitives
@@ -25,13 +25,13 @@ function type(_src){
       } else if ( (/\./).test(strRep) ){
         types += ' float';
         leType.float = src;
-      } else if( src !== src ){
+      } else if( src ){
+        types += ' infinity';
+        leType.infinity = src;
+      } else {
         types = 'nan';
         leType.nan = true;
         delete leType.number;
-      } else if( src === Infinity ){
-        types += ' infinity';
-        leType.infinity = src;
       }
     }
     strRep = ctorName = super_ = null; // clean up

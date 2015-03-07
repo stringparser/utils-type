@@ -59,7 +59,7 @@ function type(_src){
     ctorName = super_.name.toLowerCase();
     leType[ctorName] = true;
     types += ' ' + ctorName;
-    super_ = super_.constructor.super_;
+    super_ = super_.super_;
   }
   strRep = ctorName = super_ = null; // clean up
   return leType;

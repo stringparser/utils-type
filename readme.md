@@ -36,7 +36,7 @@ type( new EventEmitter() ); // ->
 //   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
 // }
 ```
-### one to many
+#### one to many
 
 ```js
 type(function one(){}).match(/function|object/);
@@ -71,6 +71,37 @@ Why:
 - `0` is a number yes, but if is changed to true you can't add to it afterwards
 - `the empty string` is changed to an space so is truthy and operations can be made on it
 - `null` and `undefined` are self explanatory
+
+## documentation
+
+The `module.exports` a function
+
+```js
+var type = require('utils-type');
+```
+
+_arguments_
+ - only one argument of any type
+
+_returns_
+ - object with as many enumerable properties as types the argument has
+
+The object returned has a `match` method that is not enumerable giving a one to many relationship.
+
+```js
+type([1,2,3])
+// => {object:[1,2,3], array:[1,2,3]}
+type([1,2,3]).match(/object|array/)
+// => {object:[1,2,3], array:[1,2,3]}
+```
+So checks that are not so strict you can be performed this way instead of
+
+```js
+var items = type([1,2,3]);
+if(items.array || items.object){
+  // do something
+}
+```
 
 ## install
 

@@ -45,7 +45,7 @@ type(function one(){}).match(/function|object/);
 
 #### composition
 
-The function returns an object. The type mached by `what` type returns itself. That is:
+The function returns an object. The type matched by `that` type returns itself. That is:
 
 ```js
 type(1).number      // -> 1 (that is truthy)

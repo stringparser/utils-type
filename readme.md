@@ -1,13 +1,10 @@
-# utils-type [![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
-<br><br>
+## utils-type [![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
 
-Expressive type checking.
+[documentation](#documentation) -
+[install](#install) -
+[todo](#todo)
 
-## install
-
-    $ npm install utils-type
-
-### usage
+#### simple
 
 ```js
 var type = require('utils-type');
@@ -33,7 +30,7 @@ type( new EventEmitter() );
 // -> { object: true, eventemitter: { domain: null, _events: {}, _maxListeners: 10 } }
 ```
 
-### composing
+#### composable
 
 The function returns an object. The type mached by `what` type returns itself. That is:
 
@@ -47,47 +44,27 @@ making easy to compose
 type(type([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
-so, you know..., turtles all the way down!
-```js
-type(
-  type(
-    type(
-      type(
-        type(
-          type([[[/*...*/[[[Infinity]]]/*...*/]]]))
-                                            .array[0])
-                                              .array[0])
-                                                .array[0])
-                                                  .array[0])
-                                                    .array[0])
-                                                      .array[0]).Infinity
-                                                            // => Infinity lol!
-```
-
-#### falsy values
+#### easy to reason with
 
 Falsy values are made true when it makes sense based on their use
 
 ```js
-var arr = [false, 0, NaN, ''];   // yes, the empty string is falsy
+var arr = [false, 0, NaN, ''];
 
-type(type(arr).array[0]).boolean // -> true      (truthy)
-type(type(arr).array[1]).number  // -> 0         (falsy)
-type(type(arr).array[2]).number  // -> undefined (nope is "Not A Number")
-type(type(arr).array[3]).string  // -> ' '       (truthy)
+type(type(arr).array[0]).boolean // -> true
+type(type(arr).array[1]).number  // -> 0
+type(type(arr).array[2]).number  // -> undefined
+type(type(arr).array[3]).string  // -> ' '
 ```
 
-Why:
- - `false` is a boolean, returning it will be misleading.
- - `0` is a number yes, but if is changed to true you can't add to it after the function returns.
- - `NaN` is not a number :D
- - `the empty string` is kept as an space so checks and operations can be done.
+- `NaN` is not a number
+- `false` is a boolean, returning it will be misleading
+- `0` is a number yes, but if is changed to true you can't add to it after the function returns
+- `the empty string` is changed to an space so is truthy and operations can be made on it
 
-### philosophy
+ ## install
 
-No specific method for each `class` is implemented. Instead use `constructor.name` and if is not present `({}).toString` to get the `[[Class]]`. This makes possible to find types/instances names all over the map with very little code.
-
-No booleans for the return value. An object is returned. True/false is achieved just by checking the existence of properties.
+    $ npm install utils-type
 
 ### test
 
@@ -95,9 +72,7 @@ No booleans for the return value. An object is returned. True/false is achieved 
 
 ### todo
 
- - [ ] Make browser tests
- - [X] Make more server tests (included `stream`, `event emitter`)
- `function` property.
+ - [ ] Include browser tests
 
 ### license
 

@@ -1,17 +1,7 @@
-# utils-type [<img alt="progressed.io" src="http://progressed.io/bar/80" align="right"/>](https://github.com/fehmicansaglam/progressed.io)
-
-[<img alt="build" src="http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square" align="left"/>](https://travis-ci.org/stringparser/utils-type/builds)
-[<img alt="NPM version" src="http://img.shields.io/npm/v/utils-type.svg?style=flat-square" align="right"/>](http://www.npmjs.org/package/utils-type)
+# utils-type [![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
 <br><br>
 
-Robust type checking.
-
-<table>
-<tr>
-<td>Node Version</td>
-<td>>= 0.8</td>
-</tr>
-</table>
+Expressive type checking.
 
 ## install
 
@@ -111,4 +101,9 @@ No booleans for the return value. An object is returned. True/false is achieved 
 
 ### license
 
-[<img alt="LICENSE" src="http://img.shields.io/npm/l/utils-type.svg?style=flat-square"/>](http://opensource.org/licenses/MIT)
+![LICENSE](http://img.shields.io/npm/l/utils-type.svg?style=flat-square)
+
+[x-npm]: https://npmjs.org/package/utils-type
+[x-travis]: https://travis-ci.org/stringparser/utils-type/builds
+[badge-build]: http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square
+[badge-version]: http://img.shields.io/npm/v/utils-type.svg?style=flat-square

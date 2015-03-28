@@ -37,20 +37,15 @@ The function returns an object. The type mached by `what` type returns itself. T
 ```js
 type(1).number      // -> 1 (that is truthy)
 type([1,2,3]).array // -> [1,2,3] (truthy)
-type([1,2,3])       // -> { object : true, array : [1,2,3] }
-```
-making easy to compose
-```js
 type(type([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
-#### easy to reason with
+#### maintain the type
 
-Falsy values are made true when it makes sense based on their use
+Falsy values are made true when it makes sense based on their use-case
 
 ```js
 var arr = [false, 0, NaN, ''];
-
 type(type(arr).array[0]).boolean // -> true
 type(type(arr).array[1]).number  // -> 0
 type(type(arr).array[2]).number  // -> undefined
@@ -62,7 +57,9 @@ type(type(arr).array[3]).string  // -> ' '
 - `0` is a number yes, but if is changed to true you can't add to it after the function returns
 - `the empty string` is changed to an space so is truthy and operations can be made on it
 
- ## install
+## install
+
+With [npm][x-npm]
 
     $ npm install utils-type
 

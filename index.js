@@ -51,7 +51,7 @@ function type(src){
   // exploit the util.inherits pattern
   var super_ = src.constructor.super_;
   while(super_){
-    that[super_.name.toLowerCase()] = true;
+    that[super_.name.toLowerCase()] = src;
     super_ = super_.super_;
   }
   return that;

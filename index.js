@@ -6,23 +6,22 @@ var primitives = /undefined|null|string|number|boolean|symbol/;
 function type(src){
 
   var that = { };
-  var strRep = src + '';
   var classType = util.getClassType(src);
-  that[classType] = src || Boolean(strRep) || ' ';
-
-  util.defineProperty(that, 'match', '',
-    function matchType(pattern){
-      var types = Object.keys(this);
-      var source = this[types[0]];
-      if(RegExp(pattern).test(types.join(' '))){
-        return source || Boolean(source + '') || ' ';
-      }
-      return null;
-    });
+  that[classType] = src || Boolean(src + '') || ' ';
+  
+  util.defineProperty(that, 'match', '', function matchType(pattern){
+    var types = Object.keys(this);
+    var source = this[types[0]];
+    if(RegExp(pattern).test(types.join(' '))){
+      return source || Boolean(source + '') || ' ';
+    }
+    return null;
+  });
 
   // primitives
   if(primitives.test(classType)) {
     if(that.number){
+      var strRep = src + '';
       if(parseInt(strRep) === src){
         that.integer = src;
       } else if(/\./.test(strRep)){

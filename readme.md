@@ -30,7 +30,7 @@ type( new EventEmitter() );
 // -> { object: true, eventemitter: { domain: null, _events: {}, _maxListeners: 10 } }
 ```
 
-#### composable
+#### composition
 
 The function returns an object. The type mached by `what` type returns itself. That is:
 
@@ -40,22 +40,24 @@ type([1,2,3]).array // -> [1,2,3] (truthy)
 type(type([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
-#### maintain the type
-
-Falsy values are made true when it makes sense based on their use-case
+#### falsy values maintain the value if makes sense
 
 ```js
-var arr = [false, 0, NaN, ''];
-type(type(arr).array[0]).boolean // -> true
-type(type(arr).array[1]).number  // -> 0
-type(type(arr).array[2]).number  // -> undefined
-type(type(arr).array[3]).string  // -> ' '
+var arr = [false, 0, NaN, '', null, undefined];
+type(type(arr).array[0]).boolean    // -> true
+type(type(arr).array[1]).number     // -> 0
+type(type(arr).array[2]).number     // -> undefined
+type(type(arr).array[3]).string     // -> ' '
+type(type(arr).array[4]).null       // -> true
+type(type(arr).array[5]).undefined  // -> true
 ```
 
+Why:
 - `NaN` is not a number
 - `false` is a boolean, returning it will be misleading
-- `0` is a number yes, but if is changed to true you can't add to it after the function returns
+- `0` is a number yes, but if is changed to true you can't add to it afterwards
 - `the empty string` is changed to an space so is truthy and operations can be made on it
+- `null` and `undefined` are self explanatory
 
 ## install
 

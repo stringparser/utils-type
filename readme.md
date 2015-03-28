@@ -14,20 +14,33 @@ type( NaN );             // -> { nan: true }
 type( null );            // -> { null: true }
 type( true );            // -> { boolean: true }
 type( false );           // -> { boolean: true }
-type( Infinity );        // -> { infinity: true }
+type( Infinity );        // -> { infinity: Infinity }
 type( undefined );       // -> { undefined: true }
 type( 'a string');       // -> { string: 'a string' }
-type( /a regex/ );       // -> { object: true, regexp: /a regex/ } }
-type( function(){ } );   // -> { object: true, function: [Function] }
+type( /a regex/ );       // -> { object: /a regex/, regexp: /a regex/ } }
+type( function(){ } );   // -> { object: [Function], function: [Function] }
 type({ type : 'toy' });  // -> { object: { type: 'toy' } }
-type( new Date() );      // -> { object: true,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
-type( new Error() );     // -> { object: true, error: [Error] }
+type( new Date() );      // -> { object: Mon Sep 08 2014 19:10:32,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
+type( new Error() );     // -> { object: [Error], error: [Error] }
 
 // and more!
-type( new Stream() );
-// -> { object: true, eventemitter: true, stream: { domain: null, _events: {}, _maxListeners: 10 } }
-type( new EventEmitter() );
-// -> { object: true, eventemitter: { domain: null, _events: {}, _maxListeners: 10 } }
+type( new Stream() ); // ->
+// {
+//   object: { domain: null, _events: {}, _maxListeners: 10 },
+//   stream: { domain: null, _events: {}, _maxListeners: 10 },
+//   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
+// }
+type( new EventEmitter() ); // ->
+// {
+//   object: { domain: null, _events: {}, _maxListeners: 10 },
+//   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
+// }
+```
+### one to many
+
+```js
+type(function one(){}).match(/function|object/);
+// => [Function: one]
 ```
 
 #### composition

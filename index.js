@@ -1,67 +1,60 @@
 'use strict';
 
-var __toString = ({}).toString;
-var primitive = /undefined|null|string|number|boolean|symbol/;
+var util = require('./lib/util');
+var primitives = /undefined|null|string|number|boolean|symbol/;
 
-function type(_src){
+function type(src){
 
-  var src = _src;
-  // keep a clean reference so it can be reasigned
-  var strRep, leType = { };
-  var types = __toString.call(_src).match(/\w+/g)[1].toLowerCase();
+  var that = { };
+  var strRep = src + '';
+  var classType = util.getClassType(src);
+  that[classType] = src || Boolean(strRep) || ' ';
 
-  leType[types] = src || Boolean(strRep = src+'') || ' ';
-  leType.match  = function typeMatch(re){
-    return (new RegExp(re)).test(types) ? src || Boolean(src+'') || ' ' : null;
-  };
+  util.defineProperty(that, 'match', '',
+    function matchType(pattern){
+      var types = Object.keys(this);
+      var source = this[types[0]];
+      if(RegExp(pattern).test(types.join(' '))){
+        return source || Boolean(source + '') || ' ';
+      }
+      return null;
+    });
 
   // primitives
-  if( (primitive).test(types) ) {
-    if( leType.number ){
-      strRep = strRep || src + '';
-      if( parseInt(strRep) === src ){
-        types += ' integer';
-        leType.integer = src;
-      } else if ( (/\./).test(strRep) ){
-        types += ' float';
-        leType.float = src;
-      } else if( src ){
-        types += ' infinity';
-        leType.infinity = src;
+  if(primitives.test(classType)) {
+    if(that.number){
+      if(parseInt(strRep) === src){
+        that.integer = src;
+      } else if(/\./.test(strRep)){
+        that.float = src;
+      } else if(src){
+        that.infinity = src;
       } else {
-        types = 'nan';
-        leType.nan = true;
-        delete leType.number;
+        that.nan = true;
+        delete that.number;
       }
     }
-    strRep = ctorName = super_ = null; // clean up
-    return leType;
+    return that;
   }
 
   // everything else is an object
-  var ctorName = (_src.constructor.name || '').toLowerCase() || types;
-  if ( !leType.object ) {
-    leType.object = src;
-    types = 'object ' + types;
-  } else if( !(new RegExp(ctorName)).test(types) ){
-    leType[ctorName] = src;
-    types += ' ' + ctorName;
+  var ctorName = (src.constructor.name || classType).toLowerCase();
+  if (!that.object) {
+    that.object = src;
+  } else if(classType !== ctorName){
+    that[ctorName] = src;
   } else {
-    leType.plainObject = src;
-    types = 'object plainObject';
-    strRep = ctorName = super_ = null; // clean up
-    return leType;
+    that.plainObject = src;
+    return that;
   }
 
-  // util.inherits pattern
-  var super_ = _src.constructor.super_;
+  // exploit the util.inherits pattern
+  var super_ = src.constructor.super_;
   while(super_){
-    ctorName = super_.name.toLowerCase();
-    leType[ctorName] = true;
-    types += ' ' + ctorName;
+    that[super_.name.toLowerCase()] = true;
     super_ = super_.super_;
   }
-  strRep = ctorName = super_ = null; // clean up
-  return leType;
+  return that;
 }
-module.exports = type;
+
+exports = module.exports = type;

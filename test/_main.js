@@ -23,7 +23,7 @@ describe('utils-type:server', function(){
               should(type(value))
               .have.property(typeName,
                 index > 1
-                  ? Boolean(value)
+                  ? value
                   : value || Boolean(value+'') || ' '
               );
             }

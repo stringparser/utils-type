@@ -22,8 +22,6 @@ type( function(){ } );   // -> { object: [Function], function: [Function] }
 type({ type : 'toy' });  // -> { object: { type: 'toy' } }
 type( new Date() );      // -> { object: Mon Sep 08 2014 19:10:32,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
 type( new Error() );     // -> { object: [Error], error: [Error] }
-
-// and more!
 type( new Stream() ); // ->
 // {
 //   object: { domain: null, _events: {}, _maxListeners: 10 },
@@ -72,7 +70,7 @@ Why:
 - `the empty string` is changed to an space so is truthy and operations can be made on it
 - `null` and `undefined` are self explanatory
 
-## documentation
+# documentation
 
 The `module.exports` a function
 
@@ -80,30 +78,57 @@ The `module.exports` a function
 var type = require('utils-type');
 ```
 
+that takes only one argument
+
+### type
+```js
+function type(argument)
+```
+
 _arguments_
- - only one argument of any type
+ - `argument` type any
 
 _returns_
- - object with as many enumerable properties as types the argument has
+ - an object with as many enumerable properties as types the argument has
 
-The object returned has a `match` method that is not enumerable giving a one to many relationship.
-
+### type(argument).match
 ```js
-type([1,2,3])
-// => {object:[1,2,3], array:[1,2,3]}
-type([1,2,3]).match(/object|array/)
-// => {object:[1,2,3], array:[1,2,3]}
+function type(argument).match(object RegExp)
 ```
-So checks that are not so strict you can be performed this way instead of
 
+The object returned has a non enumerable `match` method giving a one to many relationship.
+
+_arguments_
+ - a regular expression
+
+_returns_
+ - the value of the given type if truthy
+ - `true` or `espace` for the empty string if the value is not truthy
+
+Useful for checks that are not so strict
 ```js
+var items = type([1,2,3]);
+
+// so you can do this
+items.match(/object|array/)
+// => {object:[1,2,3], array:[1,2,3]}
+
+// instead of this
 var items = type([1,2,3]);
 if(items.array || items.object){
   // do something
 }
 ```
 
-## install
+The method is _not_ enumerable so all the types can be obtained in a very simple manner
+
+```js
+var items = type([1,2,3]);
+Object.keys(items); // =>
+// ['object', 'array']
+```
+
+### install
 
 With [npm][x-npm]
 

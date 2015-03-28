@@ -51,22 +51,31 @@ type([1,2,3]).array // -> [1,2,3] (truthy)
 type(type([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
-#### falsy values maintain the value if makes sense
+### comprehensive
 
 ```js
-var arr = [false, 0, NaN, '', null, undefined];
-type(type(arr).array[0]).boolean    // -> true
-type(type(arr).array[1]).number     // -> 0
-type(type(arr).array[2]).number     // -> undefined
-type(type(arr).array[3]).string     // -> ' '
-type(type(arr).array[5]).undefined  // -> true
-type(type(arr).array[4]).null       // -> true
+type(0).number             // -> true
+type(0).integer            // -> 0
+type(0.4).number           // -> 0.4
+type(0.4).float            // -> 0.4
+```
+
+### falsy values maintain the value if it makes sense
+
+```js
+type(0).number             // -> true
+type(0).integer            // -> 0
+type('').string            // -> ' '
+type(null).null            // -> true
+type(NaN).number           // -> undefined
+type(false).boolean        // -> true
+type(undefined).undefined  // -> true
 ```
 
 Why:
 - `NaN` is not a number
 - `false` is a boolean, returning it will be misleading
-- `0` is a number yes, but if is changed to true you can't add to it afterwards
+- `0` is a number yes, but for `integer` its value its maintained
 - `the empty string` is changed to an space so is truthy and operations can be made on it
 - `null` and `undefined` are self explanatory
 
@@ -103,7 +112,8 @@ _arguments_
 
 _returns_
  - the value of the given type if truthy
- - `true` or `espace` for the empty string if the value is not truthy
+ - `true` if the value is `null`, `undefined` or `0`
+ - `space` for the empty string (which is falsy)
 
 Useful for checks that are not so strict
 ```js
@@ -114,7 +124,6 @@ items.match(/object|array/)
 // => {object:[1,2,3], array:[1,2,3]}
 
 // instead of this
-var items = type([1,2,3]);
 if(items.array || items.object){
   // do something
 }

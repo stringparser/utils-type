@@ -1,4 +1,4 @@
-## utils-type [![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
+[![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
 
 [documentation](#documentation) -
 [install](#install) -
@@ -48,8 +48,8 @@ type(type(arr).array[0]).boolean    // -> true
 type(type(arr).array[1]).number     // -> 0
 type(type(arr).array[2]).number     // -> undefined
 type(type(arr).array[3]).string     // -> ' '
-type(type(arr).array[4]).null       // -> true
 type(type(arr).array[5]).undefined  // -> true
+type(type(arr).array[4]).null       // -> true
 ```
 
 Why:

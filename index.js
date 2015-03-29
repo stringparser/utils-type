@@ -50,7 +50,7 @@ function type(src){
 type.match = function typeMatch(src, pattern){
   var types = Object.keys(type(src));
   if(RegExp(pattern).test(types.join(' '))){
-    return src || Boolean(src + '') || true;
+    return src || Boolean(src + '') || ' ';
   }
   return null;
 };

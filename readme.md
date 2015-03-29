@@ -1,3 +1,4 @@
+## utils-type
 [![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
 
 [documentation](#documentation) -
@@ -37,7 +38,7 @@ type( new EventEmitter() ); // ->
 #### one to many
 
 ```js
-type(function one(){}).match(/function|object/);
+type.match(function one(){}, /function|object/);
 // => [Function: one]
 ```
 
@@ -46,18 +47,19 @@ type(function one(){}).match(/function|object/);
 The function returns an object. The type matched by `that` type returns itself. That is:
 
 ```js
-type(1).number      // -> 1 (that is truthy)
-type([1,2,3]).array // -> [1,2,3] (truthy)
+type(1).number                      // -> 1 (that is truthy)
+type([1,2,3]).array                 // -> [1,2,3] (truthy)
 type(type([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
 ### comprehensive
 
 ```js
-type(0).number             // -> true
-type(0).integer            // -> 0
-type(0.4).number           // -> 0.4
+type(-1).number            // -> -1
+type(-1).integer           // -> -1
+type(NaN).nan              // -> true
 type(0.4).float            // -> 0.4
+type(Infinity).infinity    // -> Infinity
 ```
 
 ### falsy values maintain the value if it makes sense
@@ -75,7 +77,7 @@ type(undefined).undefined  // -> true
 Why:
 - `NaN` is not a number
 - `false` is a boolean, returning it will be misleading
-- `0` is a number yes, but for `integer` its value its maintained
+- `0` is a number, but for `integer` its value its maintained
 - `the empty string` is changed to an space so is truthy and operations can be made on it
 - `null` and `undefined` are self explanatory
 
@@ -87,54 +89,58 @@ The `module.exports` a function
 var type = require('utils-type');
 ```
 
-that takes only one argument
+that only takes one argument. This function has a `match` method.
 
 ### type
 ```js
-function type(argument)
+function type(value)
 ```
 
 _arguments_
- - `argument` type any
+ - `value` type any, from where types will be obtained
 
 _returns_
- - an object with as many enumerable properties as types the argument has
-
-### type(argument).match
-```js
-function type(argument).match(object RegExp)
-```
-
-The object returned has a non enumerable `match` method giving a one to many relationship.
-
-_arguments_
- - a regular expression
-
-_returns_
- - the value of the given type if truthy
- - `true` if the value is `null`, `undefined` or `0`
- - `space` for the empty string (which is falsy)
-
-Useful for checks that are not so strict
-```js
-var items = type([1,2,3]);
-
-// so you can do this
-items.match(/object|array/)
-// => {object:[1,2,3], array:[1,2,3]}
-
-// instead of this
-if(items.array || items.object){
-  // do something
-}
-```
-
-The method is _not_ enumerable so all the types can be obtained in a very simple manner
+ - an object with as many properties as types the argument has
 
 ```js
 var items = type([1,2,3]);
 Object.keys(items); // =>
 // ['object', 'array']
+```
+
+### type.match
+```js
+function type.match(value, RegExp pattern)
+```
+
+The exported function has an additional `match` method giving a one to many relationship.
+
+_arguments_
+ - `value` type any, from where types will be obtained
+ - `pattern` type regexp, regular expression to match types to
+
+_returns_
+ - null if `value` types did not match the given `pattern`
+ - `value`, true or space if the types of `value` matched `pattern`
+  - `value` when `value` is truthy
+  - true when `value` is null, NaN, 0, undefined or the empty string
+
+That is, it always returns something truthy when there was a match.
+
+Useful for checks that are not so strict.
+
+```js
+var items = [1,2,3];
+
+// so you can do this
+if(type.match(items, /object|array/)){
+  // do something
+}
+
+// instead of this which is less performant
+if(type(items).array || type(items).object){
+  // do something
+}
 ```
 
 ### install

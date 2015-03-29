@@ -38,7 +38,7 @@ type( new EventEmitter() ); // ->
 #### one to many
 
 ```js
-type.match(function one(){}, /function|object/);
+type(function one(){}).match(/function|object/);
 // => [Function: one]
 ```
 
@@ -89,7 +89,7 @@ The `module.exports` a function
 var type = require('utils-type');
 ```
 
-that only takes one argument. This function has a `match` method.
+that takes one argument.
 
 ### type
 ```js
@@ -108,9 +108,9 @@ Object.keys(items); // =>
 // ['object', 'array']
 ```
 
-### type.match
+### type(value).match
 ```js
-function type.match(value, RegExp pattern)
+function type(value).match(RegExp pattern)
 ```
 
 The exported function has an additional `match` method giving a one to many relationship.
@@ -130,15 +130,15 @@ That is, it always returns something truthy when there was a match.
 Useful for checks that are not so strict.
 
 ```js
-var items = [1,2,3];
+var items = type([1,2,3]);
 
 // so you can do this
-if(type.match(items, /object|array/)){
+if(items.match(/object|array/)){
   // do something
 }
 
-// instead of this which is less performant
-if(type(items).array || type(items).object){
+// instead of this
+if(items.array || items.object){
   // do something
 }
 ```

@@ -8,6 +8,14 @@ function type(src){
   var that = { };
   var classType = util.getClassType(src);
   that[classType] = src || Boolean(src + '') || ' ';
+  util.defineProperty(that, 'match', '', function typeMatch(pattern){
+    var types = Object.keys(this);
+    var source = this[types[0]];
+    if(RegExp(pattern).test(types.join(' '))){
+      return source || Boolean(source + '') || ' ';
+    }
+    return null;
+  });
 
   // primitives
   if(primitives.test(classType)) {
@@ -46,13 +54,5 @@ function type(src){
   }
   return that;
 }
-
-type.match = function typeMatch(src, pattern){
-  var types = Object.keys(type(src));
-  if(RegExp(pattern).test(types.join(' '))){
-    return src || Boolean(src + '') || ' ';
-  }
-  return null;
-};
 
 exports = module.exports = type;

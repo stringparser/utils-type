@@ -57,11 +57,11 @@ describe('utils-type:server', function(){
       var typeList = typeUnit.src;
       var typeChecks = typeUnit.check;
       typeList.forEach(function(value){
-        it('should type('+value+').match(/'+typeChecks.join('|')+'/g) = ' +
+        it('should type.match('+value+', /'+typeChecks.join('|')+'/g) = ' +
           (value || Boolean(value+'') || ' '),
           function(){
           var re = new RegExp(typeChecks.join('|'),'g');
-          should(type(value).match(re)).be.eql(value || Boolean(value+'') || ' ');
+          should(type.match(value, re)).be.eql(value || Boolean(value+'') || ' ');
         });
       });
     });
@@ -79,9 +79,10 @@ describe('utils-type:server', function(){
         });
         var types = Object.keys(type(value));
             types.splice(types.indexOf('match'), 1);
-        it('should only type('+value+').match(/'+types.join('|')+'/)',
+        it('should only type.match('+value+', /'+types.join('|')+'/g)',
           function(){
-            should(type(value).match(checkNots.join('|'))).be.eql(null);
+            var re = new RegExp(checkNots.join('|'), 'g');
+            should(type.match(value, re)).be.eql(null);
         });
       });
     });

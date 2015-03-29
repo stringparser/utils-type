@@ -52,7 +52,7 @@ type([1,2,3]).array                 // -> [1,2,3] (truthy)
 type(type([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
-### comprehensive
+#### comprehensive
 
 ```js
 type(-1).number            // -> -1
@@ -62,7 +62,7 @@ type(0.4).float            // -> 0.4
 type(Infinity).infinity    // -> Infinity
 ```
 
-### falsy values maintain the value if it makes sense
+#### falsy values maintain the value if it makes sense
 
 ```js
 type(0).number             // -> true
@@ -81,7 +81,9 @@ Why:
 - `the empty string` is changed to an space so is truthy and operations can be made on it
 - `null` and `undefined` are self explanatory
 
-# documentation
+<br>
+---
+### Documentation
 
 The `module.exports` a function
 

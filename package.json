@@ -1,7 +1,7 @@
 {
   "name": "utils-type",
   "main": "index.js",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "license": "MIT",
   "engines": {
     "node": ">= 0.8.0"

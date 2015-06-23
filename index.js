@@ -3,56 +3,59 @@
 var util = require('./lib/util');
 var primitives = /undefined|null|string|number|boolean|symbol/;
 
-function type(src){
+function Type(src){
+  if(!(this instanceof Type)){
+    return new Type(src);
+  }
 
-  var that = { };
-  var classType = util.getClassType(src);
-  that[classType] = src || Boolean(src + '') || ' ';
-  util.defineProperty(that, 'match', '', function typeMatch(pattern){
-    var types = Object.keys(this);
-    var source = this[types[0]];
-    if(RegExp(pattern).test(types.join(' '))){
-      return source || Boolean(source + '') || ' ';
-    }
-    return null;
-  });
-
+  var strRep, classType = util.getClassType(src);
+  this[classType] = src || Boolean(src + '') || ' ';
   // primitives
   if(primitives.test(classType)) {
-    if(that.number){
-      var strRep = src + '';
+    if(this.number){
+      strRep = src + '';
       if(parseInt(strRep) === src){
-        that.integer = src;
+        this.integer = src;
       } else if(/\./.test(strRep)){
-        that.float = src;
+        this.float = src;
       } else if(src){
-        that.infinity = src;
+        this.infinity = src;
       } else {
-        that.nan = true;
-        delete that.number;
+        this.nan = true;
+        delete this.number;
       }
     }
-    return that;
+    return this;
   }
 
   // everything else is an object
-  var ctorName = (src.constructor.name || classType).toLowerCase();
-  if (!that.object) {
-    that.object = src;
-  } else if(classType !== ctorName){
-    that[ctorName] = src;
+  var ctorName = (src.constructor.name || '').toLowerCase();
+  if(!this.object){
+    this.object = src;
+  } else if (classType !== ctorName) {
+    this[ctorName] = src;
   } else {
-    that.plainObject = src;
-    return that;
+    this.plainObject = src;
+    return this;
   }
 
   // exploit the util.inherits pattern
   var super_ = src.constructor.super_;
   while(super_){
-    that[super_.name.toLowerCase()] = src;
+    this[super_.name.toLowerCase()] = src;
     super_ = super_.super_;
   }
-  return that;
+
+  return this;
 }
 
-exports = module.exports = type;
+Type.prototype.match = function(pattern){
+  var types = Object.keys(this);
+  var source = this[types[0]];
+  if(RegExp(pattern).test(types.join(' '))){
+    return source || Boolean(source + '') || ' ';
+  }
+  return null;
+};
+
+exports = module.exports = Type;

@@ -8,28 +8,28 @@
 #### simple
 
 ```js
-var type = require('utils-type');
+var Type = require('utils-type');
 
-type( 42 );              // -> { number: 42 }
-type( NaN );             // -> { nan: true }
-type( null );            // -> { null: true }
-type( true );            // -> { boolean: true }
-type( false );           // -> { boolean: true }
-type( Infinity );        // -> { infinity: Infinity }
-type( undefined );       // -> { undefined: true }
-type( 'a string');       // -> { string: 'a string' }
-type( /a regex/ );       // -> { object: /a regex/, regexp: /a regex/ } }
-type( function(){ } );   // -> { object: [Function], function: [Function] }
-type({ type : 'toy' });  // -> { object: { type: 'toy' } }
-type( new Date() );      // -> { object: Mon Sep 08 2014 19:10:32,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
-type( new Error() );     // -> { object: [Error], error: [Error] }
-type( new Stream() ); // ->
+Type( 42 );              // -> { number: 42 }
+Type( NaN );             // -> { nan: true }
+Type( null );            // -> { null: true }
+Type( true );            // -> { boolean: true }
+Type( false );           // -> { boolean: true }
+Type( Infinity );        // -> { infinity: Infinity }
+Type( undefined );       // -> { undefined: true }
+Type( 'a string');       // -> { string: 'a string' }
+Type( /a regex/ );       // -> { object: /a regex/, regexp: /a regex/ } }
+Type( function(){ } );   // -> { object: [Function], function: [Function] }
+Type({ type : 'toy' });  // -> { object: { type: 'toy' } }
+Type( new Date() );      // -> { object: Mon Sep 08 2014 19:10:32,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
+Type( new Error() );     // -> { object: [Error], error: [Error] }
+Type( new Stream() ); // ->
 // {
 //   object: { domain: null, _events: {}, _maxListeners: 10 },
 //   stream: { domain: null, _events: {}, _maxListeners: 10 },
 //   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
 // }
-type( new EventEmitter() ); // ->
+Type( new EventEmitter() ); // ->
 // {
 //   object: { domain: null, _events: {}, _maxListeners: 10 },
 //   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
@@ -38,7 +38,7 @@ type( new EventEmitter() ); // ->
 #### one to many
 
 ```js
-type(function one(){}).match(/function|object/);
+Type(function one(){}).match(/function|object/);
 // => [Function: one]
 ```
 
@@ -47,31 +47,31 @@ type(function one(){}).match(/function|object/);
 The function returns an object. The type matched by `that` type returns itself. That is:
 
 ```js
-type(1).number                      // -> 1 (that is truthy)
-type([1,2,3]).array                 // -> [1,2,3] (truthy)
-type(type([1,2,3]).array[1]).number // -> 1 (truthy)
+Type(1).number                      // -> 1 (that is truthy)
+Type([1,2,3]).array                 // -> [1,2,3] (truthy)
+Type(Type([1,2,3]).array[1]).number // -> 1 (truthy)
 ```
 
 #### comprehensive
 
 ```js
-type(-1).number            // -> -1
-type(-1).integer           // -> -1
-type(NaN).nan              // -> true
-type(0.4).float            // -> 0.4
-type(Infinity).infinity    // -> Infinity
+Type(-1).number            // -> -1
+Type(-1).integer           // -> -1
+Type(NaN).nan              // -> true
+Type(0.4).float            // -> 0.4
+Type(Infinity).infinity    // -> Infinity
 ```
 
 #### falsy values maintain the value if it makes sense
 
 ```js
-type(0).number             // -> true
-type(0).integer            // -> 0
-type('').string            // -> ' '
-type(null).null            // -> true
-type(NaN).number           // -> undefined
-type(false).boolean        // -> true
-type(undefined).undefined  // -> true
+Type(0).number             // -> true
+Type(0).integer            // -> 0
+Type('').string            // -> ' '
+Type(null).null            // -> true
+Type(NaN).number           // -> undefined
+Type(false).boolean        // -> true
+Type(undefined).undefined  // -> true
 ```
 
 Why:
@@ -85,37 +85,39 @@ Why:
 ---
 ### Documentation
 
-The `module.exports` a function
+The `module.exports` a constructor function
 
 ```js
-var type = require('utils-type');
+var Type = require('utils-type');
 ```
 
 that takes one argument.
 
-### type
+### Type
 ```js
-function type(value)
+function Type(value)
 ```
 
 _arguments_
  - `value` type any, from where types will be obtained
 
 _returns_
- - an object with as many properties as types the argument has
+ - object with as many properties as types the argument has
 
 ```js
-var items = type([1,2,3]);
+var Type = require('utils-type');
+var items = Type([1,2,3]);
 Object.keys(items); // =>
 // ['object', 'array']
 ```
 
-### type(value).match
+### type.match
 ```js
-function type(value).match(RegExp pattern)
+function Type(value).match(RegExp pattern)
 ```
 
-The exported function has an additional `match` method giving a one to many relationship.
+The constructor prototype has an additional method to
+check types through a regular expression.
 
 _arguments_
  - `value` type any, from where types will be obtained
@@ -127,12 +129,13 @@ _returns_
   - `value` when `value` is truthy
   - true when `value` is null, NaN, 0, undefined or the empty string
 
-That is, it always returns something truthy when there was a match.
+Always returing `truthy` when there was a match.
 
 Useful for checks that are not so strict.
 
 ```js
-var items = type([1,2,3]);
+var Type = require('utils-type');
+var items = Type([1,2,3]);
 
 // so you can do this
 if(items.match(/object|array/)){

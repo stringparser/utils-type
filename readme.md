@@ -1,4 +1,5 @@
-## utils-type
+# utils-type
+
 [![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
 
 [documentation](#documentation) -

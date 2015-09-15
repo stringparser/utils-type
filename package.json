@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "mocha": "*",
+    "semver": "^5.0.3",
     "should": "*"
   },
   "author": "Javier Carrillo",

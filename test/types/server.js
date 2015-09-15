@@ -1,97 +1,96 @@
 'use strict';
 
+var semver = require('semver');
 var Stream = require('stream');
 var EventEmitter = require('events').EventEmitter;
 
 exports.checks = [
-  'undefined','null','string', 'number', 'boolean', 'symbol',
+  'undefined', 'null', 'string', 'number', 'boolean', 'symbol',
   'nan', 'infinity', 'arguments',
   'object', 'plainObject', 'function', 'array', 'regexp', 'error',
   'date', 'math', 'buffer', 'stream', 'eventemitter',
-  'integer', 'float'
+  'integer', 'float', 'uint8array'
 ];
 
-module.exports.types = (function(){
+module.exports.tests = (function(/* arguments */){
   return ([
     {
-        src : [null],
-      check : ['null']
+        src: [null],
+      check: ['null']
     },
     {
-        src : [undefined],
-      check : ['undefined']
+        src: [undefined],
+      check: ['undefined']
     },
     {
-        src : [true, false, Boolean('')],
-      check : ['boolean']
+        src: [true, false, Boolean('')],
+      check: ['boolean']
     },
     {
-        src : [ NaN ],
-      check : ['nan']
+        src: [ NaN ],
+      check: ['nan']
     },
     {
-        src : [ Infinity ],
-      check : ['number', 'infinity']
+        src: [ Infinity ],
+      check: ['number', 'infinity']
     },
     {
-        src : [-3, -2, -1, 0, 1, 2, 3],
-      check : ['number', 'integer']
+        src: [-3, -2, -1, 0, 1, 2, 3],
+      check: ['number', 'integer']
     },
     {
-        src : [ -3.3, -2.2, -1.1, 1.01, 2.1, Math.E, Math.PI],
-      check : ['number', 'float']
+        src: [ -3.3, -2.2, -1.1, 1.01, 2.1, Math.E, Math.PI],
+      check: ['number', 'float']
     },
     {
-        src : ['a string', '', '     '],
-      check : ['string']
-    },
-    /*{
-        src : ['', '      ', null, undefined, function(a,b){   }, 0, NaN, { }],
-      check : ['empty']
-    },*/,
-    {
-        src : [{ }, { yep : 'yep' }],
-      check : ['object', 'plainObject']
+        src: ['a string', '', '     '],
+      check: ['string']
     },
     {
-        src : [arguments],
-      check : ['object', 'arguments']
+        src: [{ }, { yep: 'yep' }],
+      check: ['object', 'plainObject']
     },
     {
-        src : [[1,2,3], [arguments, 1, function(){}, [1,23,4]]],
-      check : ['object', 'array']
+        src: [arguments],
+      check: ['object', 'arguments']
     },
     {
-        src : [function something(){ }, function(){ }],
-      check : ['object', 'function']
+        src: [[1, 2, 3], [arguments, 1, function(){}, [1, 23, 4]]],
+      check: ['object', 'array']
     },
     {
-        src : [Math],
-      check : ['object', 'math']
+        src: [function something(){ }, function(){ }],
+      check: ['object', 'function']
     },
     {
-        src : [new Error(), new TypeError()],
-      check : ['object', 'error']
+        src: [Math],
+      check: ['object', 'math']
     },
     {
-        src : [new RegExp()],
-      check : ['object', 'regexp']
+        src: [new Error(), new TypeError()],
+      check: ['object', 'error']
     },
     {
-        src : [new Date()],
-      check : ['object', 'date']
+        src: [new RegExp()],
+      check: ['object', 'regexp']
     },
     {
-        src : [new Buffer('hello')],
-      check : ['object', 'buffer']
+        src: [new Date()],
+      check: ['object', 'date']
     },
     {
-        src : [new Stream()],
-      check : ['object', 'stream', 'eventemitter']
+        src: [new Buffer('hello')],
+      check: semver.satisfies(process.version, '>=3.x')
+        ? ['object', 'buffer', 'uint8array']
+        : ['object', 'buffer']
     },
     {
-        src : [new EventEmitter()],
-      check : ['object', 'eventemitter']
+        src: [new Stream()],
+      check: ['object', 'stream', 'eventemitter']
+    },
+    {
+        src: [new EventEmitter()],
+      check: ['object', 'eventemitter']
     }
   ]);
 })();

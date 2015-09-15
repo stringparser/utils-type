@@ -2,20 +2,22 @@
 
 var type = require('../.');
 var should = require('should');
-var server = { };
-    server.testSuite = require('./types/server');
+
+var types = {
+  server: require('./types/server')
+};
 
 describe('utils-type:server', function(){
 
-  var types = server.testSuite.types;
+  var tests = types.server.tests;
   describe('type(value) should have property {typeName}', function(){
-    types.forEach(function(typeUnit){
-      var typeList = typeUnit.src;
-      var typeChecks = typeUnit.check;
-      typeList.forEach(function(value){
-        it('type('+value+') to have prop {'+typeChecks.join('}, {')+'}',
+    tests.forEach(function(typeUnit){
+      var list = typeUnit.src;
+      var checks = typeUnit.check;
+      list.forEach(function(value){
+        it('type(' + value + ') to have prop {' + checks.join('}, {') + '}',
           function(){
-          typeChecks.forEach(function(typeName, index){
+          checks.forEach(function(typeName, index){
             if( typeName === 'integer' ){
               should(type(value))
                 .have.property(typeName, value);
@@ -24,7 +26,7 @@ describe('utils-type:server', function(){
               .have.property(typeName,
                 index > 1
                   ? value
-                  : value || Boolean(value+'') || ' '
+                  : value || Boolean(value + '') || ' '
               );
             }
           });
@@ -33,10 +35,10 @@ describe('utils-type:server', function(){
     });
   });
 
-  var checks = server.testSuite.checks;
+  var checks = types.server.checks;
   describe('should not have other property types',
     function(){
-    server.testSuite.types.forEach(function(typeUnit){
+    types.server.tests.forEach(function(typeUnit){
       var typeList = typeUnit.src;
       var typeChecks = typeUnit.check;
       typeList.forEach(function(value){
@@ -53,11 +55,11 @@ describe('utils-type:server', function(){
 
   describe('should type(value).match(/name/) = value || Bolean(value+\'\') || \' \'',
     function(){
-    types.forEach(function(typeUnit){
+    types.server.tests.forEach(function(typeUnit){
       var typeList = typeUnit.src;
       var typeChecks = typeUnit.check;
       typeList.forEach(function(value){
-        it('should type('+value+').match(/'+typeChecks.join('|')+'/g) = ' +
+        it('should type(' + value + ').match(/'+typeChecks.join('|') + '/g) = ' +
           (value || Boolean(value+'') || ' '),
           function(){
           var re = new RegExp(typeChecks.join('|'),'g');
@@ -68,21 +70,20 @@ describe('utils-type:server', function(){
   });
 
   describe('type.match should return null if it doesnt match its type(s)', function(){
-    server.testSuite.types.forEach(function(typeUnit){
+    types.server.tests.forEach(function(typeUnit){
       var typeList = typeUnit.src;
       var typeChecks = typeUnit.check;
       var checkNots = [];
       typeList.forEach(function(value){
         checks.filter(function(typeName){
-          if( typeChecks.indexOf(typeName) > -1 ){ return ; }
+          if( typeChecks.indexOf(typeName) > -1 ){ return; }
           checkNots.push(typeName);
         });
-        var types = Object.keys(type(value));
-            types.splice(types.indexOf('match'), 1);
-        it('should only type('+value+').match(/'+types.join('|')+'/)',
+        var keys = Object.keys(type(value));
+        it('should only type(' + value + ').match(/' + keys.join('|') + '/)',
           function(){
             should(type(value).match(checkNots.join('|'))).be.eql(null);
-        });
+          });
       });
     });
   });

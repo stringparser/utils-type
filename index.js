@@ -1,61 +1,64 @@
 'use strict';
 
-var util = require('./lib/util');
+var __toString = ({}).toString;
 var primitives = /undefined|null|string|number|boolean|symbol/;
 
-function Type(src){
-  if(!(this instanceof Type)){
-    return new Type(src);
-  }
+function type(src){
+  var strRep;
 
-  var strRep, classType = util.getClassType(src);
-  this[classType] = src || Boolean(src + '') || ' ';
+  var self = Object.create(type.proto);
+  var className = __toString.call(src).match(/\w+/g)[1].toLowerCase();
+  self[className] = src || Boolean(strRep = src + '') || ' ';
+
   // primitives
-  if(primitives.test(classType)) {
-    if(this.number){
-      strRep = src + '';
+  if(primitives.test(className)){
+    if(self.number){
+      strRep = strRep || src.toString(10);
       if(parseInt(strRep) === src){
-        this.integer = src;
+        self.integer = src;
       } else if(/\./.test(strRep)){
-        this.float = src;
+        self.float = src;
       } else if(src){
-        this.infinity = src;
+        self.infinity = src;
       } else {
-        this.nan = true;
-        delete this.number;
+        self.nan = true;
+        delete self.number;
       }
+      return self;
     }
-    return this;
+    return self;
   }
 
   // everything else is an object
+  self.object = src;
   var ctorName = (src.constructor.name || '').toLowerCase();
-  if(!this.object){
-    this.object = src;
-  } else if (classType !== ctorName) {
-    this[ctorName] = src;
-  } else {
-    this.plainObject = src;
-    return this;
+  if (className !== ctorName) {
+    self[ctorName] = src;
+  } else if(className === 'object'){
+    self.plainObject = src;
+    return self;
   }
 
   // exploit the util.inherits pattern
   var super_ = src.constructor.super_;
   while(super_){
-    this[super_.name.toLowerCase()] = src;
+    self[super_.name.toLowerCase()] = src;
     super_ = super_.super_;
   }
-
-  return this;
+  return self;
 }
 
-Type.prototype.match = function(pattern){
-  var types = Object.keys(this);
-  var source = this[types[0]];
-  if(RegExp(pattern).test(types.join(' '))){
-    return source || Boolean(source + '') || ' ';
-  }
-  return null;
-};
+type.proto = Object.create(null);
 
-exports = module.exports = Type;
+Object.defineProperty(type.proto, 'match', {
+  value: function match(pattern){
+    if(!pattern || !pattern.source){ return null; }
+    var types = Object.keys(this);
+    if(RegExp(pattern.source).test(types)){
+      return this[types[0]] || true;
+    }
+    return null;
+  }
+});
+
+exports = module.exports = type;

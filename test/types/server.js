@@ -78,12 +78,12 @@ module.exports.tests = (function(/* arguments */){
         src: [new Date()],
       check: ['object', 'date']
     },
-    {
-        src: [new Buffer('hello')],
-      check: semver.satisfies(process.version, '>=3.x')
-        ? ['object', 'buffer', 'uint8array']
-        : ['object', 'buffer']
-    },
+    // {
+    //     src: [new Buffer('hello')],
+    //   check: semver.satisfies(process.version, '>=3.x')
+    //     ? ['object', 'buffer', 'uint8array']
+    //     : ['object', 'buffer']
+    // },
     {
         src: [new Stream()],
       check: ['object', 'stream', 'eventemitter']

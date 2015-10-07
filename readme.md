@@ -1,6 +1,6 @@
-# utils-type
+# utils-type [![NPM version][badge-version]][x-npm]
 
-[![build][badge-build]][x-travis][![NPM version][badge-version]][x-npm]
+[![build][badge-build]][x-travis]
 
 [documentation](#documentation) -
 [install](#install) -
@@ -11,26 +11,26 @@
 ```js
 var type = require('utils-type');
 
-type( 42 );              // -> { number: 42 }
-type( NaN );             // -> { nan: true }
-type( null );            // -> { null: true }
-type( true );            // -> { boolean: true }
-type( false );           // -> { boolean: true }
-type( Infinity );        // -> { infinity: Infinity }
-type( undefined );       // -> { undefined: true }
-type( 'a string');       // -> { string: 'a string' }
-type( /a regex/ );       // -> { object: /a regex/, regexp: /a regex/ } }
-type( function(){ } );   // -> { object: [Function], function: [Function] }
+type(42);              // -> { number: 42 }
+type(NaN);             // -> { nan: true }
+type(null);            // -> { null: true }
+type(true);            // -> { boolean: true }
+type(false);           // -> { boolean: true }
+type(Infinity);        // -> { infinity: Infinity }
+type(undefined);       // -> { undefined: true }
+type('a string');       // -> { string: 'a string' }
+type(/a regex/);       // -> { object: /a regex/, regexp: /a regex/ } }
+type(function(){ });   // -> { object: [Function], function: [Function] }
 type({ type : 'toy' });  // -> { object: { type: 'toy' } }
-type( new Date() );      // -> { object: Mon Sep 08 2014 19:10:32,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
-type( new Error() );     // -> { object: [Error], error: [Error] }
-type( new Stream() );
+type(new Date());      // -> { object: Mon Sep 08 2014 19:10:32,  date: Mon Sep 08 2014 19:10:32 GMT+0200 (CEST) }
+type(new Error());     // -> { object: [Error], error: [Error] }
+type(new Stream());
 // -> {
 //   object: { domain: null, _events: {}, _maxListeners: 10 },
 //   stream: { domain: null, _events: {}, _maxListeners: 10 },
 //   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
 // }
-type( new EventEmitter() );
+type(new EventEmitter());
 // -> {
 //   object: { domain: null, _events: {}, _maxListeners: 10 },
 //   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }

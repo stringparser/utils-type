@@ -165,5 +165,5 @@ With [npm][x-npm]
 
 [x-npm]: https://npmjs.org/package/utils-type
 [x-travis]: https://travis-ci.org/stringparser/utils-type/builds
-[badge-build]: http://img.shields.io/travis/stringparser/utils-type/master.svg?style=flat-square
+[badge-build]: https://travis-ci.org/stringparser/utils-type.svg?branch=master
 [badge-version]: http://img.shields.io/npm/v/utils-type.svg?style=flat-square

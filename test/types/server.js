@@ -1,6 +1,5 @@
 'use strict';
 
-var semver = require('semver');
 var Stream = require('stream');
 var EventEmitter = require('events').EventEmitter;
 

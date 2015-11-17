@@ -1,57 +1,54 @@
 'use strict';
 
-var util = require('./lib/util');
 var primitive = /undefined|null|string|number|boolean|symbol/;
+var __toString = Object.prototype.toString;
 
-exports = module.exports = Type;
+exports = module.exports = type;
 
-function Type(src){
-  if(!(this instanceof Type)){ return new Type(src); }
-  var strRep, className = util.getClassName(src);
+function type(src){
+  var strRep;
+  var className = getClassName(src);
 
+  var o = Object.create(null);
   if(primitive.test(className)){
     if(className === 'number'){
       strRep = src + '';
       if(parseInt(strRep) === src){
-        this.integer = src;
+        o.integer = src;
       } else if(/\./.test(strRep)){
-        this.float = src;
+        o.float = src;
       } else if(src){
-        this.infinity = src;
+        o.infinity = src;
       } else {
-        this.nan = true;
-        return this;
+        o.nan = true;
+        return o;
       }
     }
-    this[className] = src || Boolean(src + '') || ' ';
-    return this;
+    o[className] = src || Boolean(src + '') || ' ';
+    return o;
   }
 
   // everything else is an object
-  this[className] = this.object = src;
+  o[className] = o.object = src;
   var ctorName = (src.constructor.name || '').toLowerCase();
 
   if (className !== ctorName) {
-    this[ctorName] = src;
+    o[ctorName] = src;
   } else if(className === 'object'){
-    this.plainObject = src;
-    return this;
+    o.plainObject = src;
+    return o;
   }
 
   // exploit node's util.inherits pattern
   var super_ = src.constructor.super_;
   while(super_){
-    this[super_.name.toLowerCase()] = src;
+    o[super_.name.toLowerCase()] = src;
     super_ = super_.super_;
   }
+
+  return o;
 }
 
-Type.prototype.match = function(pattern){
-  var re = RegExp(pattern);
-  for(var key in this){
-    if(this.hasOwnProperty(key) && re.test(key)){
-      return this[key] || true;
-    }
-  }
-  return null;
-};
+function getClassName(src){
+  return __toString.call(src).match(/\w+/g)[1].toLowerCase();
+}

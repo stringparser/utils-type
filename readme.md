@@ -1,10 +1,11 @@
 # utils-type [![NPM version][badge-version]][x-npm]
 
-[![build][badge-build]][x-travis]
-
 [documentation](#documentation) -
 [install](#install) -
+[notes](#notes) -
 [todo](#todo)
+
+[![build][badge-build]][x-travis]
 
 #### simple
 
@@ -30,17 +31,6 @@ type(new Stream());
 //   stream: { domain: null, _events: {}, _maxListeners: 10 },
 //   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
 // }
-type(new EventEmitter());
-// -> {
-//   object: { domain: null, _events: {}, _maxListeners: 10 },
-//   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
-// }
-```
-#### one to many
-
-```js
-type(function one(){}).match(/function|object/);
-// => [Function: one]
 ```
 
 #### composition
@@ -61,9 +51,14 @@ type(-1).integer           // -> -1
 type(NaN).nan              // -> true
 type(0.4).float            // -> 0.4
 type(Infinity).infinity    // -> Infinity
+type(new EventEmitter())
+// -> {
+//   object: { domain: null, _events: {}, _maxListeners: 10 },
+//   eventemitter: { domain: null, _events: {}, _maxListeners: 10 }
+// }
 ```
 
-#### falsy values maintain the value if it makes sense
+#### `falsy` values maintain the value if it makes sense
 
 ```js
 type(0).number             // -> true
@@ -112,39 +107,6 @@ Object.keys(items); // =>
 // ['object', 'array']
 ```
 
-### type.match
-```js
-function type(value).match(RegExp pattern)
-```
-
-The constructor prototype has an additional method to
-check types through a regular expression.
-
-_arguments_
- - `value` type any, from where types will be obtained
- - `pattern` type regexp, regular expression to match types to
-
-_returns_
- - null if `value` types did not match the given `pattern`
- - `value`, true or space if the types of `value` matched `pattern`
-  - `value` when `value` is truthy
-  - true when `value` is null, NaN, 0, undefined or the empty string
-
-Always returns `truthy` when there was a match.
-
-Useful for checks that are not so strict.
-
-```js
-var type = require('utils-type');
-var items = type([1,2,3]);
-
-// so one can do this
-if(items.match(/object|array/)){ }
-
-// instead of this
-if(items.array || items.object){ }
-```
-
 ### install
 
 With [npm][x-npm]
@@ -154,6 +116,12 @@ With [npm][x-npm]
 ### test
 
     $ npm test
+
+### notes
+
+The module uses `Objec.create` in order to not produce false positives when checking properties on the returned object. So it basically needs support for object create. Polyfill it, for more info:
+
+[http://kangax.github.io/compat-table/es5/](http://kangax.github.io/compat-table/es5/)
 
 ### todo
 
